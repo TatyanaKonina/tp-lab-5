@@ -20,18 +20,21 @@ class Deanery {
     std::vector<Group *> *groups;
     void createGroups();
     void hireStudents();
+    std::stringbuf generateStatistic();
     std::minstd_rand simple_rand;
  public:
     Deanery();
     Group& getGroup(const std::string &title);
-    void addMarksToAll();
+    void addMarksToAll(int amount);
     void getStatistics();
-    void moveStudents();
+    void moveStudents(int _id, std::string &title);
+    void moveStudents(std::string& Name, std::string &title);
     void saveStuff();
     void initHeads();
-    void fireStudents();
+    void fireStudents(int _id);
+    void fireStudents(std::string& name);
     int rand_int() { return simple_rand(); }
     ~Deanery();
 };
 
-#endif //TP_LAB_5_DEANERY_H
+#endif  // TP_LAB_5_DEANERY_H

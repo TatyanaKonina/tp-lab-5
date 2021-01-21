@@ -2,13 +2,10 @@
 
 #include <iostream>
 #include <Deanery.h>
-#include <random>
+
 
 int main(int argc, char* argv[]) {
-
     Deanery deanery{};
-
+    deanery.getStatistics();
     return 0;
-
-
 }

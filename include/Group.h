@@ -27,8 +27,8 @@ public:
     title(_title), spec(_spec), deanery(&_deanery),
     students(new std::vector<Student *>()) {}
     double getAverageMark();
-    Student& getStudent(std::string& fio);
     Student& getStudent(int id);
+    Student& getStudent(std::string& fio);
     int containsStudent(Student &student);
     std::string getTitle();
     Student& getHead();
@@ -37,4 +37,4 @@ public:
 };
 
 
-#endif //TP_LAB_5_GROUP_H
+#endif  // TP_LAB_5_GROUP_H

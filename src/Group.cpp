@@ -4,6 +4,7 @@
 #include <Deanery.h>
 #include <Group.h>
 
+
 void Group::addStudent(Student &student) {
     students->push_back(&student);
 }
@@ -14,6 +15,11 @@ void Group::removeStudent(Student &student) {
         std::cout << student.getName() << " удален из группы \""
                   << title << "\"." << std::endl;
         students->erase(students->begin() + student_index);
+        if (student.isHeadOfGroup()) {
+            chooseHead();
+            std::cout << "Новый староста группы: "
+            << getHead().getName() << std::endl;
+        }
     }
 }
 
@@ -27,7 +33,11 @@ void Group::chooseHead() {
 }
 
 double Group::getAverageMark() {
-    return 0;
+    double averageMark = 0;
+    for (auto &student : *students) {
+        averageMark += student->getAverageMark();
+    }
+    return averageMark / students->size();
 }
 
 Student &Group::getStudent(std::string& fio) {

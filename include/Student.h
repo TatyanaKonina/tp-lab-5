@@ -28,4 +28,4 @@ public:
     bool isHeadOfGroup();
 };
 
-#endif //TP_LAB_5_STUDENT_H
+#endif  // TP_LAB_5_STUDENT_H
