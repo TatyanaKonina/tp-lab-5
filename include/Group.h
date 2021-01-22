@@ -21,14 +21,14 @@ class Group {
     Deanery *deanery;
     void addStudent(Student &student);
     void removeStudent(Student& student);
-    void chooseHead();
+    void chooseHead(int oldHeadId = -1, bool silence=true);
 public:
     Group(std::string& _title, std::string& _spec, Deanery &_deanery) :
     title(_title), spec(_spec), deanery(&_deanery),
     students(new std::vector<Student *>()) {}
     double getAverageMark();
     Student& getStudent(int id);
-    Student& getStudent(std::string& fio);
+    Student& getStudent(const std::string& fio);
     int containsStudent(Student &student);
     std::string getTitle();
     Student& getHead();

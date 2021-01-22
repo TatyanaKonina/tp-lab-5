@@ -22,13 +22,15 @@ class Deanery {
     void hireStudents();
     std::stringbuf generateStatistic();
     std::minstd_rand simple_rand;
+    Group &groupByStudent(int _id);
+    Group &groupByStudent(const std::string& name);
+    Group &getGroup(const std::string &title);
  public:
     Deanery();
-    Group& getGroup(const std::string &title);
     void addMarksToAll(int amount);
     void getStatistics();
     void moveStudents(int _id, std::string &title);
-    void moveStudents(std::string& Name, std::string &title);
+    void moveStudents(std::string& name, std::string &title);
     void saveStuff();
     void initHeads();
     void fireStudents(int _id);

@@ -10,7 +10,7 @@
 
 
 void Deanery::createGroups() {
-    std::string g = R"(F:\Projects\C++\tp-lab-5\src\data\groups.json)";
+    std::string g = R"(..\..\src\data\groups.json)";
     std::ifstream ig(g);
     nlohmann::json jg;
     ig >> jg;
@@ -25,7 +25,7 @@ void Deanery::createGroups() {
 }
 
 void Deanery::hireStudents() {
-    std::string s = R"(F:\Projects\C++\tp-lab-5\src\data\students.json)";
+    std::string s = R"(..\..\src\data\students.json)";
     std::ifstream is(s);
     nlohmann::json js;
     is >> js;
@@ -37,6 +37,26 @@ void Deanery::hireStudents() {
         Group *g = groups->at(rand_int() % groups->size());
         g->addStudent(*student);
         student->addToGroup(g);
+    }
+}
+
+Group &Deanery::groupByStudent(int _id) {
+    for (auto &group : *groups) {
+        for (auto &student : *group->students) {
+            if (student->getId() == _id) {
+                return *group;
+            }
+        }
+    }
+}
+
+Group &Deanery::groupByStudent(const std::string& name) {
+    for (auto &group : *groups) {
+        for (auto &student : *group->students) {
+            if (student->getName() == name) {
+                return *group;
+            }
+        }
     }
 }
 
@@ -85,18 +105,18 @@ std::stringbuf Deanery::generateStatistic() {
     for (auto &group : *groups) {
         stream << "Группа \"" << group->getTitle()
         << " [" << group->spec << "]\n";
-        stream << "Количество студентов: " << group->students->size() << "\n";
+        stream << "Количество студентов:\t" << group->students->size() << "\n";
         for (auto &student : *group->students) {
             stream << student->getName() << "[" << student->getId() << "] ";
         }
-        stream << "\nСредний балл в группе: "
+        stream << "\nСредний балл в группе:\t"
         << group->getAverageMark() << "\n";
         stream << "Претенденты на красный диплом:\n";
-        double averageMark = 0;
+        double averageMark;
         for (auto &student : *group->students) {
             averageMark = student->getAverageMark();
             if (averageMark >= 7.5) {
-                stream << student->getName() << "[" << student->getId() << "]"
+                stream << student->getName() << "[" << student->getId() << "]\t"
                 << " " << averageMark << "\n";
             }
         }
@@ -104,10 +124,11 @@ std::stringbuf Deanery::generateStatistic() {
         for (auto &student : *group->students) {
             averageMark = student->getAverageMark();
             if (averageMark < 4) {
-                stream << student->getName() << "[" << student->getId() << "]"
+                stream << student->getName() << "[" << student->getId() << "]\t"
                        << " " << averageMark << "\n";
             }
         }
+        stream << "\n";
     }
     return str;
 }
@@ -118,31 +139,30 @@ void Deanery::getStatistics() {
 
 void Deanery::moveStudents(int _id, std::string &title) {
     Group &group = getGroup(title);
-    Student &student = group.getStudent(_id);
+    Group &old_group = groupByStudent(_id);
+    Student &student = old_group.getStudent(_id);
     student.group->removeStudent(student);
     group.addStudent(student);
     student.addToGroup(&group);
     std::cout << "Студент " << student.getName() << " переведен из группы \""
-    << student.group->getTitle() << "\" в группу \"" << title << "\"."
-    << std::endl;
+    << old_group.getTitle() << "\" в группу \"" << title << "\"." << std::endl;
 }
 
-void Deanery::moveStudents(std::string& Name, std::string &title) {
+void Deanery::moveStudents(std::string& name, std::string &title) {
     Group &group = getGroup(title);
-    Student &student = group.getStudent(Name);
+    Group &old_group = groupByStudent(name);
+    Student &student = old_group.getStudent(name);
     student.group->removeStudent(student);
     group.addStudent(student);
     student.addToGroup(&group);
     std::cout << "Студент " << student.getName() << " переведен из группы \""
-    << student.group->getTitle() << "\" в группу \"" << title << "\"."
-    << std::endl;
+    << old_group.getTitle() << "\" в группу \"" << title << "\"." << std::endl;
 }
 
 void Deanery::saveStuff() {
-    std::string s = R"(F:\Projects\C++\tp-lab-5\src\data\statistic.txt)";
-    std::fstream file(s);
+    std::string s = R"(..\..\src\data\statistic.txt)";
+    std::ofstream file(s);
     file << generateStatistic().str();
-    file.close();
 }
 
 void Deanery::initHeads() {
@@ -152,29 +172,21 @@ void Deanery::initHeads() {
 }
 
 void Deanery::fireStudents(int _id) {
-    for (auto &group : *groups) {
-        Student &student = group->getStudent(_id);
-        if (&student != nullptr) {
-            group->removeStudent(student);
-            std::cout << "Студент " << student.getName()
-            << " был отчислен." << std::endl;
-            delete &student;
-            break;
-        }
-    }
+    Group &group = groupByStudent(_id);
+    Student &student = group.getStudent(_id);
+    group.removeStudent(student);
+    std::cout << "Студент " << student.getName()
+    << " был отчислен." << std::endl;
+    delete &student;
 }
 
 void Deanery::fireStudents(std::string &name) {
-    for (auto &group : *groups) {
-        Student &student = group->getStudent(name);
-        if (&student != nullptr) {
-            group->removeStudent(student);
-            std::cout << "Студент " << student.getName()
-                      << " был отчислен." << std::endl;
-            delete &student;
-            break;
-        }
-    }
+    Group &group = groupByStudent(name);
+    Student &student = group.getStudent(name);
+    group.removeStudent(student);
+    std::cout << "Студент " << student.getName()
+              << " был отчислен." << std::endl;
+    delete &student;
 }
 
 Group &Deanery::getGroup(const std::string &title) {

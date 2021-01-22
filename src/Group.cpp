@@ -14,21 +14,26 @@ void Group::removeStudent(Student &student) {
     if (-1 != student_index) {
         std::cout << student.getName() << " удален из группы \""
                   << title << "\"." << std::endl;
-        students->erase(students->begin() + student_index);
         if (student.isHeadOfGroup()) {
-            chooseHead();
+            chooseHead(student.getId(), false);
             std::cout << "Новый староста группы: "
             << getHead().getName() << std::endl;
         }
+        students->erase(students->begin() + student_index);
+
     }
 }
 
-void Group::chooseHead() {
+void Group::chooseHead(int oldHeadId, bool silence) {
     if (!isEmpty()) {
-        Student &st = *students->at(deanery->rand_int() % students->size());
-        std::cout << "В группе \"" << title << "\" старостой назначен(а) "
-        << st.getName() << std::endl;
-        head = &st;
+        do {
+            Student &st = *students->at(deanery->rand_int() % students->size());
+            head = &st;
+        } while (head->getId() == oldHeadId);
+        if (!silence){
+            std::cout << "В группе \"" << title << "\" старостой назначен(а) "
+                      << head->getName() << std::endl;
+        }
     }
 }
 
@@ -40,8 +45,8 @@ double Group::getAverageMark() {
     return averageMark / students->size();
 }
 
-Student &Group::getStudent(std::string& fio) {
-    for (auto & student : *students) {
+Student &Group::getStudent(const std::string& fio) {
+    for (auto *student : *students) {
         if (student->getName() == fio) {
             return *student;
         }
@@ -49,7 +54,7 @@ Student &Group::getStudent(std::string& fio) {
 }
 
 Student &Group::getStudent(int id) {
-    for (auto & student : *students) {
+    for (auto *student : *students) {
         if (student->getId() == id) {
             return *student;
         }
