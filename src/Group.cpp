@@ -3,28 +3,15 @@
 
 Group::Group(std::string newTitle,
              std::string newSpec,
-             std::vector<Student *> newStudents,
+             const std::vector<Student *> &newStudents,
              Student *newHead) {
 
-  this->title = std::move(newTitle); // название группы
-  this->spec = std::move(newSpec); // специальность
-//  this->students = std::move(newStudents);  // - вектор ссылок на студентов
-  this->head = newHead; // - ссылка на старосту (из членов группы)
+  this->title = std::move(newTitle);
+  this->spec = std::move(newSpec);
+  this->head = newHead;
 }
 
-//Group *Group::makeGroup(std::string newTitle,
-//                        std::string newSpec,
-//                        std::vector<Student *> newStudents,
-//                        Student *newHead) {
-//  Group *gr = new Group;
-//  gr->title = std::move(newTitle); // название группы
-//  gr->spec = std::move(newSpec); // специальность
-//  Group::students = std::move(newStudents);  // - вектор ссылок на студентов
-//  gr->head = newHead; // - ссылка на старосту (из членов группы)
-//  return gr;
-//}
-
-bool Group::containStudent(int stId) {  // non static
+bool Group::containStudent(int stId) {
   for (auto &st:students) {
     if (st->getStId() == stId) {
       return true;
@@ -44,7 +31,7 @@ Student *Group::getStudent(int stId) {
   return nullptr;
 }
 
-float Group::getAverageMark() {  // non st
+float Group::getAverageMark() {
   float sum = 0.0;
   for (auto &st:students) {
     sum += st->getAverageMark();
@@ -52,7 +39,7 @@ float Group::getAverageMark() {  // non st
   return sum / students.size();
 }
 
-bool Group::isEmpty() {  // non st
+bool Group::isEmpty() {
   if (students.empty()) {
     return true;
   } else {
@@ -80,19 +67,17 @@ void Group::removeStudent(int stId) {
       break;
     }
   }
-
   bool isHead = false;
   if (st->isHeadOfGroup()) {
     isHead = true;
   }
 
-//  st->id = 0;
-//  st->fio = nullptr;
-//  st->group = nullptr;
-//  st->marks = static_cast<const std::vector<int>>(0);
+  //  st->id = 0;
+  //  st->fio = nullptr;
+  //  st->group = nullptr;
+  //  st->marks = static_cast<const std::vector<int>>(0);
 
   removeFromVec(students, stIndexInVec);  // del from students vec
-
   if (isHead) {
     chooseHead(students);
   }
@@ -101,11 +86,15 @@ void Group::removeStudent(int stId) {
 Student *Group::chooseHead(const std::vector<Student *> &newStudents) {
   int beginId = newStudents[0]->getStId();
   int endId = newStudents[newStudents.size() - 1]->getStId();
-
+  if (beginId < endId) { //////////////////////////////////////////////////////////////
+    int tmp;
+    tmp = beginId;
+    beginId = endId;
+    endId = tmp;
+  }
   PRNG *generator = new PRNG;
   initGenerator(*generator);
   int idHead = random(*generator, beginId, endId);
-
   for (auto &st:newStudents) {
     if (st->getStId() == idHead) {
       return st;
@@ -116,4 +105,8 @@ Student *Group::chooseHead(const std::vector<Student *> &newStudents) {
 
 std::vector<Student *> Group::getStudents() {
   return this->students;
+}
+
+std::string Group::getSpec() {
+  return this->spec;
 }

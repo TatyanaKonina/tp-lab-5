@@ -16,12 +16,12 @@ void Deanery::createGroups(const std::map<std::string, std::string> &nameGrSp,
                            const std::vector<std::vector<std::string>> &namesFI) {
   auto it = nameGrSp.begin();
   for (int i = 0; it != nameGrSp.end(); it++, i++) {
-    Group *gr;
+    Group *gr = nullptr;
     std::vector<Student *> newStudents;
     newStudents = hireStudents(namesFI[i]);
     Student *newHead = initHeads(gr, newStudents);
     Group *newGr = new Group(it->first, it->second, newStudents, newHead);
-    for (auto &st:newStudents) {    /////////////////////////////////////////////////////
+    for (auto &st:newStudents) {
       st->addToGroup(st, newGr);
     }
     groups.push_back(newGr);
@@ -62,20 +62,18 @@ void Deanery::getStatistics(STATISTICS statistics) {
 //  }
 }
 
-std::map<std::vector<Student *>, std::string> Deanery::getStatisticsMove() {
+std::map<std::vector<Student *>, std::string> Deanery::getStatisticsPunish() {
   float generalAverageMark = 0.0;
   std::string lowerPI;
   std::vector<Student *> stsLowerPI;
   std::string lowerPMI;
   std::vector<Student *> stsLowerPMI;
   std::map<std::vector<Student *>, std::string> stsToGrMove;
-
   for (auto &gr:groups) {
     generalAverageMark = gr->getAverageMark();
     for (auto &st:gr->students) {
-      Student *s = st;  ////
-      if (st->getAverageMark() < generalAverageMark) {  // so-so --> move to lower group
-        std::string t = st->group->spec; ////
+      // so-so --> move to lower group
+      if (st->getAverageMark() < generalAverageMark) {
         if (st->group->spec == "PI") {  // to PMI
           stsLowerPI.push_back(st);
         } else if (st->group->spec == "PMI") {  // to BI
@@ -91,10 +89,9 @@ std::map<std::vector<Student *>, std::string> Deanery::getStatisticsMove() {
   return stsToGrMove;
 }
 
-std::vector<Student *> Deanery::getStatisticsFire() {      //////////////////
+std::vector<Student *> Deanery::getStatisticsFire() {
   float generalAverageMark = 0.0;
   std::vector<Student *> stsToFire;
-
   for (auto &gr:groups) {
     generalAverageMark = gr->getAverageMark();
     for (auto &st:gr->students) {
@@ -106,10 +103,8 @@ std::vector<Student *> Deanery::getStatisticsFire() {      //////////////////
   return stsToFire;
 }
 
-void Deanery::moveStudents(const std::vector<Student *>& sts, const std::string& newGr) {
+void Deanery::moveStudents(const std::vector<Student *> &sts, const std::string &newGr) {
   std::vector<Student *> stsToMove;
-  Student *stMove = new Student;
-
   Group *newGroup;
   for (auto &gr:groups) {
     if (gr->spec == newGr) {
@@ -119,6 +114,7 @@ void Deanery::moveStudents(const std::vector<Student *>& sts, const std::string&
   }
 
   for (auto &st:sts) {
+    Student *stMove = new Student;
     // save all info
     stMove->id = st->id;
     stMove->fio = st->fio;
@@ -133,7 +129,7 @@ void Deanery::moveStudents(const std::vector<Student *>& sts, const std::string&
 
 void Deanery::fireStudents(const std::vector<Student *> &sts) {
   for (auto &st:sts) {
-    Group* gr = st->group;
+    Group *gr = st->group;
     gr->removeStudent(st->id);
   }
 }

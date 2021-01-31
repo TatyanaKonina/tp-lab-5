@@ -85,3 +85,7 @@ int Student::getStId() const {
 std::string Student::getStNamed() const {
   return this->fio;
 }
+
+std::string Student::getStSpec() const {
+  return this->group->getSpec();
+}
