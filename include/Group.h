@@ -11,27 +11,22 @@ class Group {
 
  public:
   explicit Group(std::string newTitle,
-        std::string newSpec,
-        std::vector<Student *> newStudents,
-        Student *newHead);
-
-//  Group *makeGroup(std::string newTitle,
-//                   std::string newSpec,
-//                   std::vector<Student *> newStudents,
-//                   Student *newHead); // создание группы с указанием названия
+                 std::string newSpec,
+                 const std::vector<Student *> &newStudents,
+                 Student *newHead);
   bool containStudent(int stId); // проверка на наличие студента
   Student *getStudent(int stId); //  поиск студента по ФИО или ИД
   float getAverageMark(); //  вычисление соеднего балла в группе
   bool isEmpty();
   std::vector<Student *> getStudents();
+  std::string getSpec();
 
  private:
   std::string title; // название группы
   std::string spec; // специальность
   std::vector<Student *> students;  // - вектор ссылок на студентов
   Student *head = nullptr; // - ссылка на старосту (из членов группы)
-
-  void addStudent(Student *st, Group* gr); //  добавление студента
+  void addStudent(Student *st, Group *gr); //  добавление студента
   Student *chooseHead(const std::vector<Student *> &newStudents); // избрание старосты
   void removeStudent(int stId); // исключение студента из группы
 };

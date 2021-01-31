@@ -24,11 +24,9 @@ class Deanery {
   void addMarksToAll(); //добавление случайных оценок студентам
   void getStatistics(STATISTICS statistics);
   std::map<std::vector<Student *>,
-           std::string> getStatisticsMove(); //получение статистики по успеваемости студентов и групп
+           std::string> getStatisticsPunish(); //получение статистики по успеваемости студентов и групп
   std::vector<Student *> getStatisticsFire();
-//  void moveStudents(const std::map<std::vector<Student *>,
-//                                   std::string> &stsToGr); //   перевод студентов из группы в группу
-  void moveStudents(const std::vector<Student *>& sts, const std::string& newGr);
+  void moveStudents(const std::vector<Student *> &sts, const std::string &newGr);
   void fireStudents(const std::vector<Student *> &sts);//   отчисление студентов за неуспеваемость
   void saveStaff(); //   сохранение обновленных данных в файлах
   Student *initHeads(Group *gr, const std::vector<Student *> &newStudents);  // инициация выборов старост в группах
