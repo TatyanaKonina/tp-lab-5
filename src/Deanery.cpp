@@ -202,3 +202,7 @@ Deanery::~Deanery() {
     }
     delete groups;
 }
+
+std::vector<Group *> *Deanery::getGroups() const {
+    return groups;
+}

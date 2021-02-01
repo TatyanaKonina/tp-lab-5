@@ -34,6 +34,7 @@ class Deanery {
     void initHeads();
     void fireStudents(int _id);
     void fireStudents(const std::string& name);
+    std::vector<Group *> *getGroups() const;
     int rand_int() { return simple_rand(); }
     ~Deanery();
 };

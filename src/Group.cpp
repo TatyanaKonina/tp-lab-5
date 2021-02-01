@@ -87,3 +87,7 @@ Group::~Group() {
     }
     delete students;
 }
+
+std::vector<Student *> *Group::getStudents() const {
+    return students;
+}

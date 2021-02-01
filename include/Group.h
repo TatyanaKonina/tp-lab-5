@@ -33,6 +33,9 @@ class Group {
     std::string getTitle();
     Student& getHead();
     bool isEmpty();
+
+    std::vector<Student *> *getStudents() const;
+
     ~Group();
 };
 
