@@ -24,31 +24,34 @@ EXPECT_EQ(number_of_students[st++], group->getStudents()->size());
 
 TEST(DeaneryTest, test3) {
 Deanery deanery{};
-std::string name = "Колесников Р.А";
-std::string title = "19FM-1";
-deanery.moveStudents(name, title);
+auto *name = new std::string{"Колесников Р.А"};
+auto *title = new std::string{"19FM-1"};
+deanery.moveStudents(*name, *title);
 int st = 0;
 int number_of_students[]{40, 24, 36};
 for (auto group : *deanery.getGroups()) {
 EXPECT_EQ(number_of_students[st++], group->getStudents()->size());
+delete name;
+delete title;
 }
 }
 
 TEST(DeaneryTest, test4) {
 Deanery deanery{};
-std::string title = "19FM-1";
-deanery.moveStudents(56, title);
+auto *title = new std::string{"19FM-1"};
+deanery.moveStudents(56, *title);
 int st = 0;
 int number_of_students[]{39, 25, 36};
 for (auto group : *deanery.getGroups()) {
 EXPECT_EQ(number_of_students[st++], group->getStudents()->size());
 }
+delete title;
 }
 
 TEST(DeaneryTest, test5) {
 Deanery deanery{};
-std::string name2 = "Яковлева У.";
-deanery.fireStudents(name2);
+auto *name2 = new std::string{"Яковлева У."};
+deanery.fireStudents(*name2);
 int st = 0;
 int number_of_students[]{40, 24, 35};
 for (auto group : *deanery.getGroups()) {
@@ -58,9 +61,9 @@ EXPECT_EQ(number_of_students[st++], group->getStudents()->size());
 
 TEST(DeaneryTest, test6) {
 Deanery deanery{};
-std::string name3 = "Дементьев Д.Н";
+auto *name3 = new std::string{"Дементьев Д.Н"};
 deanery.fireStudents(99);
-EXPECT_EQ(name3, deanery.getGroups()->at(1)->getHead().getName())
+EXPECT_EQ(*name3, deanery.getGroups()->at(1)->getHead().getName());
 }
 
 TEST(DeaneryTest, test7) {
@@ -89,10 +92,10 @@ EXPECT_NEAR(3.66667, average, 0.01);
 TEST(DeaneryTest, test10) {
 Deanery deanery{};
 deanery.addMarksToAll(3);
-std::string name = "Колесников Р.А";
-std::string title = "19FM-1";
-deanery.moveStudents(name, title);
-deanery.moveStudents(56, title);
+auto *name = new std::string{"Колесников Р.А"};
+auto *title = new std::string{"19FM-1"};
+deanery.moveStudents(*name, *title);
+deanery.moveStudents(56, *title);
 double average = deanery.getGroups()->at(2)->getAverageMark();
 EXPECT_NEAR(5.18018, average, 0.0001);
 }
