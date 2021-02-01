@@ -1,12 +1,11 @@
 // Copyright 2021 valvarl
 
+#include "Deanery.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
-#include <chrono>
 #include <string>
 #include <iostream>
 #include <sstream>
-#include "Deanery.h"
 
 
 void Deanery::createGroups() {
@@ -19,7 +18,7 @@ void Deanery::createGroups() {
     for (const auto& v : groups_json) {
         auto title = v["title"].get<std::string>();
         auto spec = v["spec"].get<std::string>();
-        auto *_g = new Group{title, spec, *this};
+        auto *_g = new Group{&title, &spec, *this};
         groups->push_back(_g);
     }
 }
@@ -35,7 +34,7 @@ void Deanery::hireStudents() {
     for (auto v : students) {
         auto *student = new Student{id++, v};
         Group *g = groups->at(rand_int() % groups->size());
-        g->addStudent(*student);
+        g->addStudent(student);
         student->addToGroup(g);
     }
 }
@@ -89,9 +88,9 @@ Deanery::Deanery() {
 }
 
 void Deanery::addMarksToAll(int amount) {
-    for (int i = 0; i < amount; i++){
+    for (int i = 0; i < amount; i++) {
         for (auto group : *groups) {
-            for (auto student : *group->students){
+            for (auto student : *group->students) {
                 student->addmark(4 + rand_int() % 7 -
                                  2 * (rand_int() % 2) - rand_int() % 3);
             }
@@ -137,23 +136,23 @@ void Deanery::getStatistics() {
     std::cout << generateStatistic().str();
 }
 
-void Deanery::moveStudents(int _id, std::string &title) {
+void Deanery::moveStudents(int _id, const std::string &title) {
     Group &group = getGroup(title);
     Group &old_group = groupByStudent(_id);
     Student &student = old_group.getStudent(_id);
-    student.group->removeStudent(student);
-    group.addStudent(student);
+    student.group->removeStudent(&student);
+    group.addStudent(&student);
     student.addToGroup(&group);
     std::cout << "Студент " << student.getName() << " переведен из группы \""
     << old_group.getTitle() << "\" в группу \"" << title << "\"." << std::endl;
 }
 
-void Deanery::moveStudents(std::string& name, std::string &title) {
+void Deanery::moveStudents(const std::string& name, const std::string &title) {
     Group &group = getGroup(title);
     Group &old_group = groupByStudent(name);
     Student &student = old_group.getStudent(name);
-    student.group->removeStudent(student);
-    group.addStudent(student);
+    student.group->removeStudent(&student);
+    group.addStudent(&student);
     student.addToGroup(&group);
     std::cout << "Студент " << student.getName() << " переведен из группы \""
     << old_group.getTitle() << "\" в группу \"" << title << "\"." << std::endl;
@@ -174,16 +173,16 @@ void Deanery::initHeads() {
 void Deanery::fireStudents(int _id) {
     Group &group = groupByStudent(_id);
     Student &student = group.getStudent(_id);
-    group.removeStudent(student);
+    group.removeStudent(&student);
     std::cout << "Студент " << student.getName()
     << " был отчислен." << std::endl;
     delete &student;
 }
 
-void Deanery::fireStudents(std::string &name) {
+void Deanery::fireStudents(const std::string& name) {
     Group &group = groupByStudent(name);
     Student &student = group.getStudent(name);
-    group.removeStudent(student);
+    group.removeStudent(&student);
     std::cout << "Студент " << student.getName()
               << " был отчислен." << std::endl;
     delete &student;

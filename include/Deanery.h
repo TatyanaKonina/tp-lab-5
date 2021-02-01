@@ -1,11 +1,10 @@
 // Copyright 2021 valvarl
 
-#ifndef TP_LAB_5_DEANERY_H
-#define TP_LAB_5_DEANERY_H
+#ifndef INCLUDE_DEANERY_H_
+#define INCLUDE_DEANERY_H_
 
 #include <vector>
 #include <string>
-#include <chrono>
 #include <random>
 #include "Student.h"
 
@@ -29,14 +28,14 @@ class Deanery {
     Deanery();
     void addMarksToAll(int amount);
     void getStatistics();
-    void moveStudents(int _id, std::string &title);
-    void moveStudents(std::string& name, std::string &title);
+    void moveStudents(int _id, const std::string &title);
+    void moveStudents(const std::string& name, const std::string &title);
     void saveStuff();
     void initHeads();
     void fireStudents(int _id);
-    void fireStudents(std::string& name);
+    void fireStudents(const std::string& name);
     int rand_int() { return simple_rand(); }
     ~Deanery();
 };
 
-#endif  // TP_LAB_5_DEANERY_H
+#endif  // INCLUDE_DEANERY_H_

@@ -19,7 +19,8 @@ const std::string &Student::getName() const {
 }
 
 double Student::getAverageMark() {
-    return (double) accumulate(marks.begin(), marks.end(), 0) / marks.size();
+    return static_cast<double>(accumulate(marks.begin(), marks.end(), 0))
+    / marks.size();
 }
 
 bool Student::isHeadOfGroup() {

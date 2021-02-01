@@ -1,7 +1,7 @@
 // Copyright 2021 valvarl
 
-#ifndef TP_LAB_5_STUDENT_H
-#define TP_LAB_5_STUDENT_H
+#ifndef INCLUDE_STUDENT_H_
+#define INCLUDE_STUDENT_H_
 
 #include "Group.h"
 #include <utility>
@@ -20,7 +20,7 @@ class Student {
     std::vector<int>marks;
     void addToGroup(Group *_group);
     void addmark(int mark);
-public:
+ public:
     Student(int _id, std::string& _fio) : id(_id), fio(_fio) {}
     [[nodiscard]] int getId() const;
     [[nodiscard]] const std::string &getName() const;
@@ -28,4 +28,4 @@ public:
     bool isHeadOfGroup();
 };
 
-#endif  // TP_LAB_5_STUDENT_H
+#endif  // INCLUDE_STUDENT_H_

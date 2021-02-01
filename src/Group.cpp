@@ -1,26 +1,25 @@
 // Copyright 2021 valvarl
 
-#include <iostream>
 #include <Deanery.h>
 #include <Group.h>
+#include <iostream>
 
 
-void Group::addStudent(Student &student) {
-    students->push_back(&student);
+void Group::addStudent(Student *student) {
+    students->push_back(student);
 }
 
-void Group::removeStudent(Student &student) {
-    int student_index = containsStudent(student);
+void Group::removeStudent(Student *student) {
+    int student_index = containsStudent(*student);
     if (-1 != student_index) {
-        std::cout << student.getName() << " удален из группы \""
+        std::cout << student->getName() << " удален из группы \""
                   << title << "\"." << std::endl;
-        if (student.isHeadOfGroup()) {
-            chooseHead(student.getId(), false);
+        if (student->isHeadOfGroup()) {
+            chooseHead(student->getId(), false);
             std::cout << "Новый староста группы: "
             << getHead().getName() << std::endl;
         }
         students->erase(students->begin() + student_index);
-
     }
 }
 
@@ -30,7 +29,7 @@ void Group::chooseHead(int oldHeadId, bool silence) {
             Student &st = *students->at(deanery->rand_int() % students->size());
             head = &st;
         } while (head->getId() == oldHeadId);
-        if (!silence){
+        if (!silence) {
             std::cout << "В группе \"" << title << "\" старостой назначен(а) "
                       << head->getName() << std::endl;
         }
@@ -61,7 +60,7 @@ Student &Group::getStudent(int id) {
     }
 }
 
-int Group::containsStudent(Student &student) {
+int Group::containsStudent(const Student &student) {
     for (int i = 0; i < students->size(); i++) {
         if (students->at(i)->getId() == student.getId()) {
             return i;
@@ -83,7 +82,7 @@ bool Group::isEmpty() {
 }
 
 Group::~Group() {
-    for (auto student : *students){
+    for (auto student : *students) {
         delete student;
     }
     delete students;
