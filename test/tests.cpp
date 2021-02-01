@@ -98,4 +98,6 @@ deanery.moveStudents(*name, *title);
 deanery.moveStudents(56, *title);
 double average = deanery.getGroups()->at(2)->getAverageMark();
 EXPECT_NEAR(5.18018, average, 0.0001);
+delete  name;
+delete title;
 }
