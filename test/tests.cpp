@@ -31,8 +31,6 @@ int st = 0;
 int number_of_students[]{40, 24, 36};
 for (auto group : *deanery.getGroups()) {
 EXPECT_EQ(number_of_students[st++], group->getStudents()->size());
-delete name;
-delete title;
 }
 }
 
@@ -45,7 +43,6 @@ int number_of_students[]{39, 25, 36};
 for (auto group : *deanery.getGroups()) {
 EXPECT_EQ(number_of_students[st++], group->getStudents()->size());
 }
-delete title;
 }
 
 TEST(DeaneryTest, test5) {
@@ -61,7 +58,7 @@ EXPECT_EQ(number_of_students[st++], group->getStudents()->size());
 
 TEST(DeaneryTest, test6) {
 Deanery deanery{};
-auto *name3 = new std::string{"Дементьев Д.Н"};
+auto *name3 = new std::string{"Смирнова Е.М"};
 deanery.fireStudents(99);
 EXPECT_EQ(*name3, deanery.getGroups()->at(1)->getHead().getName());
 }
@@ -98,6 +95,4 @@ deanery.moveStudents(*name, *title);
 deanery.moveStudents(56, *title);
 double average = deanery.getGroups()->at(2)->getAverageMark();
 EXPECT_NEAR(5.18018, average, 0.0001);
-delete  name;
-delete title;
 }

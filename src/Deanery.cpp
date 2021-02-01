@@ -9,7 +9,7 @@
 
 
 void Deanery::createGroups() {
-    std::string g = R"(..\..\src\data\groups.json)";
+    std::string g = R"(groups.json)";
     std::ifstream ig(g);
     nlohmann::json jg;
     ig >> jg;
@@ -24,7 +24,7 @@ void Deanery::createGroups() {
 }
 
 void Deanery::hireStudents() {
-    std::string s = R"(..\..\src\data\students.json)";
+    std::string s = R"(students.json)";
     std::ifstream is(s);
     nlohmann::json js;
     is >> js;
@@ -159,7 +159,7 @@ void Deanery::moveStudents(const std::string& name, const std::string &title) {
 }
 
 void Deanery::saveStuff() {
-    std::string s = R"(..\..\src\data\statistic.txt)";
+    std::string s = R"(statistic.txt)";
     std::ofstream file(s);
     file << generateStatistic().str();
 }
