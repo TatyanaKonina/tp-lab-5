@@ -21,7 +21,7 @@ class Group {
     Deanery *deanery;
     void addStudent(Student *student);
     void removeStudent(Student *student);
-    void chooseHead(int oldHeadId = -1, bool silence=true);
+    void chooseHead(int oldHeadId = -1, bool silence = true);
  public:
     Group(std::string* _title, std::string* _spec, const Deanery &_deanery) :
     title(*_title), spec(*_spec), deanery(const_cast<Deanery *>(&_deanery)),

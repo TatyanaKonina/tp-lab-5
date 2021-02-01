@@ -1,11 +1,11 @@
 // Copyright 2021 valvarl
 
 #include "Deanery.h"
-#include <fstream>
-#include <nlohmann/json.hpp>
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <fstream>
+#include <nlohmann/json.hpp>
 
 
 void Deanery::createGroups() {
