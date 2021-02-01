@@ -24,6 +24,7 @@ class Deanery {
     Group &groupByStudent(const std::string& name);
     Group &getGroup(const std::string &title);
     std::string getProjectPath();
+
  public:
     Deanery();
     void addMarksToAll(int amount);
