@@ -1,6 +1,6 @@
 //// Copyright 2021 Ozhiganova Polina
 #include <sstream>
-#include "Reader.h"
+#include "../include/Reader.h"
 
 std::map<std::string, std::string> Reader::parseGrSp
     (const json &file) {
@@ -35,7 +35,7 @@ std::vector<std::vector<std::string>> Reader::parseFI
   return finale;
 }
 
-void Reader::saveStaff(Deanery *d, const json &file) {
+void Reader::saveStaff(Deanary *d, const json &file) {
   std::map<std::string, std::vector
       <std::map<std::string, std::string>>> finale_data;
   std::vector<Group *> groups = d->getGroups();

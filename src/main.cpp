@@ -1,6 +1,6 @@
 ////// Copyright 2021 Ozhiganova Polina
 #include <iostream>
-#include "Reader.h"
+#include "../include/Reader.h"
 
 int main() {
   //  WORK WITH FILE
@@ -16,7 +16,7 @@ int main() {
   std::map<std::string, std::string> nameGrSp = r->parseGrSp(jf);
   std::vector<std::vector<std::string>> namesFI = r->parseFI(jf);
   //  CREATE DEANERY
-  Deanery *d = new Deanery;
+  Deanary *d = new Deanary;
   //  CREATE GROUPS
   d->createGroups(nameGrSp, namesFI);
   //  GENERATE MARKS TO ALL ST-S
@@ -40,6 +40,6 @@ int main() {
   nlohmann::json finaleFile;
   r->saveStaff(d, finaleFile);
   // CLEAN
-  d->~Deanery();
+  d->~Deanary();
   return 0;
 }

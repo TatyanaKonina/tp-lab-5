@@ -1,6 +1,6 @@
 ////// Copyright 2021 Ozhiganova Polina
-#include "Student.h"
-#include "Group.h"
+#include "../include/Student.h"
+#include "../include/Group.h"
 
 int UniqueID::nextID = 0;
 
