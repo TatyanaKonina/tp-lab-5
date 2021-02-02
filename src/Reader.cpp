@@ -35,7 +35,7 @@ std::vector<std::vector<std::string>> Reader::parseFI
   return finale;
 }
 
-void Reader::saveStaff(Deanary *d, const json &file) {
+void Reader::saveStaff(Deanary *d, json &file) {
   std::map<std::string, std::vector
       <std::map<std::string, std::string>>> finale_data;
   std::vector<Group *> groups = d->getGroups();
