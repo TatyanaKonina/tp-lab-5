@@ -8,7 +8,7 @@
 #include <string>
 #include <map>
 #include <bprinter/table_printer.h>
-#include <include/json.hpp>
+#include <src/external/json.hpp>
 #include "Student.h"
 #include "Group.h"
 

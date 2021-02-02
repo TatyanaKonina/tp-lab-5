@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include "Deanary.h"
-#include "json.hpp"
+#include "src/external/json.hpp"
 
 class Reader {
  public:
