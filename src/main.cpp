@@ -9,7 +9,7 @@ int main() {
   test->initHeads();
   test->fireStudents();
   Group* gr = test->findGroup("Ancient landuages(assembler)", 1);
-  std::cout < <gr->getGroupSize();
+  std::cout << gr->getGroupSize();
   return 0;
 }
 
