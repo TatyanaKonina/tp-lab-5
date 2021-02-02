@@ -5,7 +5,7 @@
 #include "Deanery.h"
 #include "Student.h"
 #include "Group.h"
-#include "data.h"
+#include "Data.h"
 
 double minAverege = 3.0;
 
@@ -175,7 +175,7 @@ Student* Deanery::findStudent(unsigned int id) {
       return st;
     } else {
       continue;
-   }
+    }
   }
   std::cout << "Student does not exist" << std::endl;
   return nullptr;
