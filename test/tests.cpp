@@ -24,7 +24,7 @@ TEST(st_test, test3) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   Student* st = test->findStudent(2);
 
-  EXPECT_EQ(true, s->isHeadOfGroup());
+  EXPECT_EQ(true, st->isHeadOfGroup());
 }
 
 TEST(gr_test, test4) {
