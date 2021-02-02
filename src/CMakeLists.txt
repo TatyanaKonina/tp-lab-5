@@ -9,7 +9,6 @@ add_library(bprinter STATIC
         external/bprinter/include/bprinter/impl/table_printer.tpp.h
         external/bprinter/src/table_printer.cpp
         )
-target_link_libraries(${PROJECT_NAME} bprinter)
 
 add_library(${PROJECT_NAME} SHARED
   ${header}
