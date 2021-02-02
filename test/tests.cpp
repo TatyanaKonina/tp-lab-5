@@ -1,6 +1,6 @@
 // Copyright 2020 GHA Test Team
 
-#include <Deanery.h>
+#include <Deanary.h>
 #include <gtest/gtest.h>
 #include <string>
 
