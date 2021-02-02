@@ -1,6 +1,6 @@
 ////// Copyright 2021 Ozhiganova Polina
-#include "Student.h"
-#include "Group.h"
+#include "../include/Student.h"
+#include "../include/Group.h"
 
 int UniqueID::nextID = 0;
 
@@ -52,7 +52,7 @@ float Student::getAverageMark() {
     return 0.0;
   }
   float sum = 0.0;
-  for (auto num:this->marks) {
+  for (auto &num : this->marks) {
     sum += num;
   }
   return sum / marks.size();

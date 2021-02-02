@@ -1,18 +1,17 @@
 ////// Copyright 2021 Ozhiganova Polina
-#include "Group.h"
+#include "../include/Group.h"
 
 Group::Group(std::string newTitle,
              std::string newSpec,
              const std::vector<Student *> &newStudents,
              Student *newHead) {
-
   this->title = std::move(newTitle);
   this->spec = std::move(newSpec);
   this->head = newHead;
 }
 
 Group::~Group() {
-  for (auto &st:students) {
+  for (auto &st : students) {
     st->~Student();
   }
   this->title.clear();
@@ -22,7 +21,7 @@ Group::~Group() {
 }
 
 bool Group::containStudent(int stId) {
-  for (auto &st:students) {
+  for (auto &st : students) {
     if (st->getStId() == stId) {
       return true;
     } else {
@@ -33,7 +32,7 @@ bool Group::containStudent(int stId) {
 }
 
 Student *Group::getStudent(int stId) {
-  for (auto &st:students) {
+  for (auto &st : students) {
     if (st->getStId() == stId) {
       return st;
     }
@@ -43,7 +42,7 @@ Student *Group::getStudent(int stId) {
 
 float Group::getAverageMark() {
   float sum = 0.0;
-  for (auto &st:students) {
+  for (auto &st : students) {
     sum += st->getAverageMark();
   }
   return sum / students.size();
@@ -65,7 +64,6 @@ void removeFromVec(std::vector<Student *> &vec, size_t pos) {
   auto it = vec.begin();
   std::advance(it, pos);
   vec.erase(it);
-
 }
 
 void Group::removeStudent(int stId) {
@@ -91,7 +89,7 @@ Student *Group::chooseHead(const std::vector<Student *> &newStudents) {
   int beginId = newStudents[0]->getStId();
   int endId = newStudents[newStudents.size() - 1]->getStId();
   if (beginId > endId) {
-    for (auto &st:newStudents) {
+    for (auto &st : newStudents) {
       if (st->getStId() == beginId) {
         return st;
       }
@@ -100,7 +98,7 @@ Student *Group::chooseHead(const std::vector<Student *> &newStudents) {
     PRNG *generator = new PRNG;
     initGenerator(*generator);
     int idHead = random(*generator, beginId, endId);
-    for (auto &st:newStudents) {
+    for (auto &st : newStudents) {
       if (st->getStId() == idHead) {
         return st;
       }

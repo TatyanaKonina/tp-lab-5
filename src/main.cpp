@@ -1,6 +1,6 @@
 ////// Copyright 2021 Ozhiganova Polina
 #include <iostream>
-#include "Reader.h"
+#include "../include/Reader.h"
 
 int main() {
   //  WORK WITH FILE

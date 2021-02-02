@@ -1,6 +1,6 @@
 //// Copyright 2021 Ozhiganova Polina
 #include <sstream>
-#include "Reader.h"
+#include "../include/Reader.h"
 
 std::map<std::string, std::string> Reader::parseGrSp
     (const json &file) {
@@ -23,7 +23,7 @@ std::vector<std::vector<std::string>> Reader::parseFI
   std::vector<std::string> fi;
   std::vector<std::vector<std::string>> finale;
   for (auto &el1 : file.items()) {
-    for (auto &el2: el1.value()) {
+    for (auto &el2 : el1.value()) {
       std::string name = el2["name"];
       std::string surname = el2["surname"];
       std::string surnameName = surname + " " + name;
@@ -35,16 +35,16 @@ std::vector<std::vector<std::string>> Reader::parseFI
   return finale;
 }
 
-void Reader::saveStaff(Deanery *d, json &file) {
+void Reader::saveStaff(Deanery *d, const json &file) {
   std::map<std::string, std::vector
       <std::map<std::string, std::string>>> finale_data;
   std::vector<Group *> groups = d->getGroups();
-  for (auto &gr:groups) {
+  for (auto &gr : groups) {
     std::string grTitleSpec;
     grTitleSpec = gr->getTitle() + "-" + gr->getSpec();
     std::vector<std::map<std::string, std::string>> fioVec;
     std::vector<Student *> students = gr->getStudents();
-    for (auto &st:students) {
+    for (auto &st : students) {
       std::map<std::string, std::string> surnameName;
       std::string surname;
       std::string name;
