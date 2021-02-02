@@ -58,7 +58,7 @@ bool Group::removeStudent(unsigned int id) {
 }
 double Group::getAverageMarks() {
   double average = 0;
-  for (std::map<unsigned long int, Student*>::iterator it =
+  for (std::map<unsigned int, Student*>::iterator it =
        students.begin(); it != students.end(); ++it) {
     average += it->second->getAverage();
   }
