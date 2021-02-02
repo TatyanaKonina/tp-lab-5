@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "Deanery.h"
+#include "Deanary.h"
 #include "json.hpp"
 
 class Reader {
@@ -13,7 +13,7 @@ class Reader {
   using json = nlohmann::json;
   std::map<std::string, std::string> parseGrSp(const json &file);
   std::vector<std::vector<std::string>> parseFI(const json &file);
-  void saveStaff(Deanery *d, const json &file);
+  void saveStaff(Deanary *d, const json &file);
 };
 
 #endif //  INCLUDE_READER_H_

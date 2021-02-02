@@ -5,7 +5,7 @@
 #include <string>
 #include "Student.h"
 
-class Deanery;
+class Deanary;
 class Group {
   friend class Deanery;
   friend class Student;
