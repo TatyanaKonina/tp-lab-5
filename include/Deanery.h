@@ -3,10 +3,12 @@
 #define INCLUDE_DEANERY_H_
 #include <iostream>
 #include <thread>
-#include <bprinter/table_printer.h>
-#include "external/json.hpp"
-#include <vector>
 #include <zconf.h>
+#include <vector>
+#include <string>
+#include <map>
+#include <bprinter/table_printer.h>
+#include <include/json.hpp>
 #include "Student.h"
 #include "Group.h"
 
@@ -31,7 +33,8 @@ class Deanery {
   std::map<std::vector<Student *>,
            std::string> getStatisticsPunish();
   std::vector<Student *> getStatisticsFire();
-  void moveStudents(const std::vector<Student *> &sts, const std::string &newGr);
+  void moveStudents(const std::vector<Student *> &sts,
+                    const std::string &newGr);
   void fireStudents(const std::vector<Student *> &sts);
   Student *initHeads(Group *gr, const std::vector<Student *> &newStudents);
   std::vector<Group *> getGroups();
@@ -43,4 +46,4 @@ class Deanery {
   std::vector<Group *> groups;
 };
 
-#endif //INCLUDE_DEANERY_H_
+#endif //  INCLUDE_DEANERY_H_

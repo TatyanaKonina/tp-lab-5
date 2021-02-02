@@ -2,15 +2,18 @@
 #ifndef INCLUDE_READER_H_
 #define INCLUDE_READER_H_
 #include <fstream>
+#include <map>
+#include <string>
+#include <vector>
 #include "Deanery.h"
-#include <external/json.hpp>
+#include "json.hpp"
 
 class Reader {
  public:
   using json = nlohmann::json;
   std::map<std::string, std::string> parseGrSp(const json &file);
   std::vector<std::vector<std::string>> parseFI(const json &file);
-  void saveStaff(Deanery *d, json &file);
+  void saveStaff(Deanery *d, const json &file);
 };
 
-#endif //INCLUDE_READER_H_
+#endif //  INCLUDE_READER_H_

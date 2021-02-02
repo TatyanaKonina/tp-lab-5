@@ -1,6 +1,7 @@
 ////// Copyright 2021 Ozhiganova Polina
 #ifndef INCLUDE_GROUP_H_
 #define INCLUDE_GROUP_H_
+#include <vector>
 #include <string>
 #include "Student.h"
 
@@ -33,4 +34,4 @@ class Group {
   void removeStudent(int stId);
 };
 
-#endif //INCLUDE_GROUP_H_
+#endif //  INCLUDE_GROUP_H_

@@ -55,4 +55,4 @@ class Student {
   void addMark(int mark);
 };
 
-#endif //INCLUDE_STUDENT_H_
+#endif //  INCLUDE_STUDENT_H_
