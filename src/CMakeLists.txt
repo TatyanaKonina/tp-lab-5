@@ -3,6 +3,14 @@ set(header ${header_path}/Student.h ${header_path}/Group.h ${header_path}/Deanar
 set(src Student.cpp Group.cpp Deanary.cpp Reader.cpp)
 
 
+include_directories(${PROJECT_SOURCE_DIR} PUBLIC external/bprinter/include)
+add_library(bprinter STATIC
+        external/bprinter/include/bprinter/table_printer.h
+        external/bprinter/include/bprinter/impl/table_printer.tpp.h
+        external/bprinter/src/table_printer.cpp
+        )
+target_link_libraries(${PROJECT_NAME} bprinter)
+
 add_library(${PROJECT_NAME} SHARED
   ${header}
   ${src})
