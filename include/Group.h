@@ -14,21 +14,23 @@ class Group {
                  std::string newSpec,
                  const std::vector<Student *> &newStudents,
                  Student *newHead);
-  bool containStudent(int stId); // проверка на наличие студента
-  Student *getStudent(int stId); //  поиск студента по ФИО или ИД
-  float getAverageMark(); //  вычисление соеднего балла в группе
+  ~Group();
+  bool containStudent(int stId);
+  Student *getStudent(int stId);
+  float getAverageMark();
   bool isEmpty();
   std::vector<Student *> getStudents();
   std::string getSpec();
+  std::string getTitle();
 
  private:
-  std::string title; // название группы
-  std::string spec; // специальность
-  std::vector<Student *> students;  // - вектор ссылок на студентов
-  Student *head = nullptr; // - ссылка на старосту (из членов группы)
-  void addStudent(Student *st, Group *gr); //  добавление студента
-  Student *chooseHead(const std::vector<Student *> &newStudents); // избрание старосты
-  void removeStudent(int stId); // исключение студента из группы
+  std::string title;
+  std::string spec;
+  std::vector<Student *> students;
+  Student *head = nullptr;
+  void addStudent(Student *st, Group *gr);
+  Student *chooseHead(const std::vector<Student *> &newStudents);
+  void removeStudent(int stId);
 };
 
 #endif //INCLUDE_GROUP_H_

@@ -2,6 +2,7 @@
 #ifndef INCLUDE_READER_H_
 #define INCLUDE_READER_H_
 #include <fstream>
+#include "Deanery.h"
 #include "external/json.hpp"
 
 class Reader {
@@ -9,6 +10,7 @@ class Reader {
   using json = nlohmann::json;
   std::map<std::string, std::string> parseGrSp(const json &file);
   std::vector<std::vector<std::string>> parseFI(const json &file);
+  void saveStaff(Deanery *d, json &file);
 };
 
 #endif //INCLUDE_READER_H_

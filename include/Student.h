@@ -33,10 +33,11 @@ class Student {
   friend class Deanery;
 
  public:
-  explicit Student(std::string newFio, UniqueID *newId); //создание студента с указанием ИД и ФИО
-  Student(); //создание студента с указанием ИД и ФИО
+  explicit Student(std::string newFio, UniqueID *newId);
+  Student();
+  ~Student();
   bool isHeadOfGroup();
-  float getAverageMark(); // вычисление средней оценки
+  float getAverageMark();
   [[nodiscard]] int getStId() const;
   [[nodiscard]] std::string getStNamed() const;
   [[nodiscard]] std::string getStSpec() const;
@@ -45,12 +46,13 @@ class Student {
   static int nextID;
 
  private:
-  int id; // идентификационный номер
-  std::string fio; // - фамилия и инициалы
-  Group *group{}; // ссылка на группу (объект Group)
-  std::vector<int> marks; // вектор оценок
-  void addMark(PRNG *generator, bool addBadMarks);//добавление оценки
-  void addToGroup(Student *st, Group *gr); //   зачисление в группу
+  int id;
+  std::string fio;
+  Group *group{};
+  std::vector<int> marks;
+  void addMarksInit(PRNG *generator, const std::string &whichMark);
+  void addToGroup(Student *st, Group *gr);
+  void addMark(int mark);
 };
 
 #endif //INCLUDE_STUDENT_H_
