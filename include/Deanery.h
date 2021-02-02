@@ -10,12 +10,12 @@ class Group;
 class Student;
 
 class Deanery {
-private:
+ private:
   std::vector<Group*> groups;
   std::map<std::string, int> specList;
 
-public:
-  Deanery(std::string groups_list);
+ public:
+  explicit Deanery(std::string groups_list);
   Deanery(std::string groups_list, std::string st_list);
 
   void createGroups(std::string input);
@@ -30,8 +30,8 @@ public:
   void getStatistics();
   void initHeads();
   void fireStudents();
-  Group* findGroup(std::string spec,int title);
-  Student* findStudent(unsigned long int id);
+  Group* findGroup(std::string spec, int title);
+  Student* findStudent(unsigned int id);
 };
-#endif 
+#endif // INCLUDE_DEANERY_H_
 
