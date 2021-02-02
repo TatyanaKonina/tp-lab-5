@@ -68,3 +68,4 @@ TEST(d_test, test10) {
   Group* gr = test->findGroup("Ancient landuages(assembler)", 1);
   EXPECT_EQ(4, gr->getGroupSize());
 }
+
