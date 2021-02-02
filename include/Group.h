@@ -7,7 +7,7 @@
 
 class Deanary;
 class Group {
-  friend class Deanery;
+  friend class Deanary;
   friend class Student;
 
  public:
