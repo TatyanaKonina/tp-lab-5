@@ -7,5 +7,5 @@
 
 std::vector<std::map<int, std::string>> read_st(std::string input);
 std::vector<std::string> read_spec(std::string input);
-#endif//INCLUDE_DATA_H_
+#endif  // INCLUDE_DATA_H_
 
