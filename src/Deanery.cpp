@@ -20,7 +20,7 @@ enum  data_in_file {
 Deanery::Deanery(std::string groups_list ) {
   (*this).createGroups(groups_list);
 }
-Deanery::Deanery(std::string groups_list,std::string st_list) {
+Deanery::Deanery(std::string groups_list, std::string st_list) {
   (*this).createGroups(groups_list);
   (*this).hireStudent(st_list);
 }
@@ -45,7 +45,8 @@ void Deanery::hireStudent(std::string input) {
       marks.push_back(stoi(data[i][MARKS].substr(0, pos)));
       Student* st = new Student(stoi(data[i][ID]),
                                 data[i][FIO], marks, data[i][SPEC]);
-      int randGroup = rand() % specList[data[i][SPEC]] + 1;
+      unsigned int seed;
+      int randGroup = rand_r(&seed)  % specList[data[i][SPEC]] + 1;
       for (auto group : groups) {
         if (group->getSpec() == st->getSpec() &&
             group->getTitle() == randGroup) {
@@ -84,7 +85,8 @@ void  Deanery::printStudents() const {
 
 void Deanery::addMarksToAll(Group * group) const {
   for (auto st : group->getStudents()) {
-    int randomMark = rand() % 10;
+    unsigned int seed;
+    int randomMark = rand_r(&seed) % 10;
     st.second->addMark(randomMark);
   }
 }
@@ -126,7 +128,8 @@ void Deanery::getStatistics() {
     std::cout << "Students statictic:" << std::endl;
     for (auto st : group->getStudents()) {
       double studentStatictic = st.second->getAverage();
-      std::cout << st.second->getFio() << " - " << studentStatictic << std::endl;
+      std::cout << st.second->getFio() << " - "
+        << studentStatictic << std::endl;
     }
     std::cout << "Group  statictic:" << group->getAverageMarks() << std::endl;
   }
@@ -139,7 +142,6 @@ void Deanery::initHeads() {
     }
   }
 }
-
 void Deanery::updateInfo(std::string output) const {
   std::string tmp = "";
   std::ofstream fout(output);
@@ -149,7 +151,7 @@ void Deanery::updateInfo(std::string output) const {
         tmp = tmp + std::to_string(mark) + " ";
       }
       tmp.pop_back();
-      fout << "group:" << group->getTitle() << "," << "id:" 
+      fout << "group:" << group->getTitle() << "," << "id:"
         << st.second->getId() << "," <<
         "fio:" << st.second->getFio() << "," << "marks:" << tmp << ","
         << "spec:"<< group->getSpec()<< ","
@@ -157,11 +159,9 @@ void Deanery::updateInfo(std::string output) const {
         st.second->isHeadOfGroup()<< std::endl;
       tmp.clear();
     }
-    
   }
   fout.close();
 }
-
 Group* Deanery::findGroup(std::string spec, int title) {
   for (auto group : groups) {
     if (group->getSpec() == spec && group->getTitle() == title) {
@@ -169,10 +169,9 @@ Group* Deanery::findGroup(std::string spec, int title) {
     }
   }
 }
-
-Student* Deanery::findStudent(unsigned long int id) {
+Student* Deanery::findStudent(unsigned int id) {
   for (auto group : groups) {
-    if(Student* st = group->search(id)){      
+    if (Student* st = group->search(id)) {
       return st;
     } else {
       continue;
