@@ -1,6 +1,6 @@
 // Copyright 2020 Konina Tatiana
 #include <iostream>
-#include "Deanery.h"
+#include "Deanary.h"
 #include "Student.h"
 #include "Group.h"
 
