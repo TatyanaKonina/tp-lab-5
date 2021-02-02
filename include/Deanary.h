@@ -19,9 +19,7 @@ enum STATISTICS {
 };
 
 class Deanary {
-  friend class Group;
-  friend class UniqueID;
-
+ 
  public:
   ~Deanary();
   std::vector<Student *> hireStudents(const std::vector<std::string> &namesFI);
