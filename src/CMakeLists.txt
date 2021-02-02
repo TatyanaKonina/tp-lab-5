@@ -10,6 +10,7 @@ add_library(bprinter STATIC
         external/bprinter/src/table_printer.cpp
         )
 
+
 add_library(${PROJECT_NAME} SHARED
   ${header}
   ${src})
@@ -36,4 +37,5 @@ install(TARGETS ${PROJECT_NAME}.info
 		RUNTIME DESTINATION "${tool_dest}"
     COMPONENT library)
 install(FILES ${header} DESTINATION "${include_dest}")
+
 target_link_libraries(${PROJECT_NAME} bprinter)
