@@ -33,5 +33,5 @@ class Deanery {
   Group* findGroup(std::string spec, int title);
   Student* findStudent(unsigned int id);
 };
-#endif // INCLUDE_DEANERY_H_
+#endif //INCLUDE_DEANERY_H_
 
