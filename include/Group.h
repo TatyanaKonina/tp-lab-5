@@ -9,14 +9,13 @@
 class Student;
 
 class Group {
-private:
-  std::map <unsigned long int, Student*> students;
+ private:
+  std::map <unsigned int, Student*> students;
   Student* head;
   unsigned int title;
   std::string spec;
-  
-public:
-  Group(std::string spec,unsigned int groupNum);
+ public:
+  Group(std::string spec, unsigned int groupNum);
   bool addStudent(Student* student);
   void chooseHead();
   bool isEmpty();
@@ -24,12 +23,11 @@ public:
   double getAverageMarks();
   Student* search(unsigned int id);
   int getHead();
-  std::map <unsigned long int, Student*> getStudents();
+  std::map <unsigned int, Student*> getStudents();
   std::string getSpec() const;
   unsigned int getTitle() const;
   int getGroupSize() const;
-
 };
 
-#endif 
+#endif // INCLUDE_GROUP_H_
 
