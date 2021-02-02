@@ -1,7 +1,11 @@
 // Copyright 2020 Konina Tatiana
 
 #include <gtest/gtest.h>
-#include <string>
+#include "Data.h"
+#include "Student.h"
+#include "Group.h"
+#include "Deanary.h"
+
 
 TEST(st_test, test1) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
