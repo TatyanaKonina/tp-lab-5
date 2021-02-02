@@ -1,6 +1,6 @@
 // Copyright 2020 Konina Tatiana
-#ifndef INCLUDE_DEANERY_H_
-#define INCLUDE_DEANERY_H_
+#ifndef INCLUDE_DEANARY_H_
+#define INCLUDE_DEANARY_H_
 
 #include <vector>
 #include <string>
@@ -33,5 +33,5 @@ class Deanery {
   Group* findGroup(std::string spec, int title);
   Student* findStudent(unsigned int id);
 };
-#endif  // INCLUDE_DEANERY_H_
+#endif  // INCLUDE_DEANARY_H_
 
