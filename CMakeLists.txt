@@ -10,7 +10,7 @@ add_library(bprinter STATIC
         external/bprinter/include/bprinter/impl/table_printer.tpp.h
         external/bprinter/src/table_printer.cpp
         )
-target_link_libraries(Lab_5 bprinter)
+target_link_libraries(tp-lab-5 bprinter)
 include_directories(${PROJECT_NAME} PUBLIC external/json.hpp)
 
 
