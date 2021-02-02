@@ -41,7 +41,7 @@ void Deanary::addMarksToAll() {
   std::vector<int> marks;
   for (auto &gr : groups) {
     for (auto &st : gr->students) {
-      Sleep(30);
+      sleep(1);
       PRNG *gen_low_mark = new PRNG;
       initGenerator(gen_low_mark);
       int low_mark = random(gen_low_mark, 1, 4);
