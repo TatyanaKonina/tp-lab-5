@@ -3,7 +3,8 @@
 #include "Student.h"
 #include "Group.h"
 
-Student::Student(unsigned int id, std::string fio, std::vector <unsigned int> marks, std::string spec) {
+Student::Student(unsigned int id, std::string fio,
+                 std::vector <unsigned int> marks, std::string spec) {
   this->fio = fio;
   this->id = id;
   this->group = NULL;
@@ -34,7 +35,7 @@ void Student::addToGroup(Group* group) {
 std::string Student::getFio() const {
   return this->fio;
 }
-unsigned long int Student::getId() const {
+unsigned int Student::getId() const {
   return this->id;
 }
 std::string Student::getSpec() const  {
