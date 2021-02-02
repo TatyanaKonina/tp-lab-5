@@ -29,5 +29,5 @@ class Group {
   int getGroupSize() const;
 };
 
-#endif//INCLUDE_GROUP_H_
+#endif  // INCLUDE_GROUP_H_
 
