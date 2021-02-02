@@ -1,9 +1,7 @@
 // Copyright 2020 Konina Tatiana
+#include<iostream>
 #include "Group.h"
 #include "Student.h"
-
-#include<iostream>
-
 Group::Group(std::string spec, unsigned int groupNum) {
   this->spec = spec;
   this->title = groupNum;
@@ -14,13 +12,11 @@ bool Group::addStudent(Student* st) {
   if (students.count(st->getId())) {
     std::cout << "Probabilty of Student" << st->getFio() << "beeing already in group" << std::endl;
     return true;
-  }
-  else {
+  } else {
     if (students.size() == 20) {
       std::cout << "group is full" << std::endl;
       return false;
-    }
-    else {
+    } else {
       students.emplace(st->getId(), st);
       st->addToGroup(this);
       return true;
@@ -68,8 +64,7 @@ double Group::getAverageMarks() {
 Student* Group::search(unsigned int id) {
   if (students.count(id)) {
     return students[id];
-  }
-  else {
+  } else {
     std::cout<< "Student do not exist";
     return nullptr;
   }
@@ -99,3 +94,4 @@ unsigned int Group::getTitle() const {
 int Group::getGroupSize() const {
   return students.size();
 }
+
