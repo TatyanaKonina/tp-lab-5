@@ -1,9 +1,9 @@
 ////// Copyright 2021 Ozhiganova Polina
 #include <gtest/gtest.h>
-#include "Student.h"
-#include "Group.h"
-#include "Deanery.h"
-#include "Reader.h"
+#include "include/Student.h"
+#include "include/Group.h"
+#include "include/Deanery.h"
+#include "include/Reader.h"
 
 TEST(Student, check_empty_const) {
 Student student;
@@ -18,7 +18,7 @@ TEST(Student, check_id_creation) {
   EXPECT_EQ(rez, student.getStId());
 }
 
-TEST(Student,check_st_name) {
+TEST(Student, check_st_name) {
   UniqueID *newId1 = new UniqueID;
   Student *student1 = new Student("Mitchel Mia", newId1);
   std::string rez = "Mitchel Mia";
