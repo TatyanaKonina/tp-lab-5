@@ -10,7 +10,8 @@ Group::Group(std::string spec, unsigned int groupNum) {
 
 bool Group::addStudent(Student* st) {
   if (students.count(st->getId())) {
-    std::cout << "Probabilty of Student" << st->getFio() << "beeing already in group" << std::endl;
+    std::cout << "Probabilty of Student" << st->getFio()
+      << "beeing already in group" << std::endl;
     return true;
   } else {
     if (students.size() == 20) {
@@ -26,8 +27,9 @@ bool Group::addStudent(Student* st) {
 
 void Group::chooseHead() {
   double maxAverage = 0;
-  unsigned long int idBestStudent;
-  for (std::map<unsigned long int, Student*>::iterator it = students.begin(); it != students.end(); ++it) {
+  unsigned int idBestStudent;
+  for (std::map<unsigned int, Student*>::iterator it =
+       students.begin(); it != students.end(); ++it) {
     if (maxAverage < it->second->getAverage()) {
       maxAverage = it->second->getAverage();
       idBestStudent = it->first;
@@ -50,13 +52,14 @@ bool Group::removeStudent(unsigned int id) {
       chooseHead();
     }
     return true;
-  } 
+  }
   std::cout << "Student do not exist";
   return false;
 }
 double Group::getAverageMarks() {
   double average = 0;
-  for (std::map<unsigned long int, Student*>::iterator it = students.begin(); it != students.end(); ++it) {
+  for (std::map<unsigned long int, Student*>::iterator it =
+       students.begin(); it != students.end(); ++it) {
     average += it->second->getAverage();
   }
   return average / students.size();
@@ -68,11 +71,10 @@ Student* Group::search(unsigned int id) {
     std::cout<< "Student do not exist";
     return nullptr;
   }
-  
 }
-
 int Group::getHead() {
-  for (std::map<unsigned long int, Student*>::iterator it = students.begin(); it != students.end(); ++it) {
+  for (std::map<unsigned int, Student*>::iterator it =
+       students.begin(); it != students.end(); ++it) {
     if (it->second->isHeadOfGroup()) {
       return it->first;
     }
@@ -80,7 +82,7 @@ int Group::getHead() {
   return -1;
 }
 
-std::map <unsigned long int, Student*> Group::getStudents() {
+std::map <unsigned int, Student*> Group::getStudents() {
   return students;
 }
 
