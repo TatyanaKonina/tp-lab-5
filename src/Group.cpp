@@ -1,5 +1,5 @@
 ////// Copyright 2021 Ozhiganova Polina
-#include "../include/Group.h"
+#include "Group.h"
 
 Group::Group(std::string newTitle,
              std::string newSpec,
