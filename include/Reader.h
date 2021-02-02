@@ -3,7 +3,7 @@
 #define INCLUDE_READER_H_
 #include <fstream>
 #include "Deanery.h"
-#include "external/json.hpp"
+#include <external/json.hpp>
 
 class Reader {
  public:
