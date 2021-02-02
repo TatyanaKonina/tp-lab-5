@@ -11,7 +11,7 @@ enum  data_in_file {
   GROUP_NUM
 };
 
-std::string findToken(std::string tok, std::string delimiter,std::string buf) {
+std::string findToken(std::string tok, std::string delimiter, std::string buf) {
   size_t pos1 = buf.find(tok);
   pos1 += tok.length() + 1;
   size_t pos2 = buf.substr(pos1, buf.length()).find(delimiter) + pos1;
