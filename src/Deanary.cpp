@@ -193,7 +193,7 @@ void Deanary::moveStudents(const std::vector<Student *> &sts,
       break;
     }
   }
-  for (auto &st:sts) {
+  for (auto &st : sts) {
     Student *stMove = new Student;
     //  save all info
     stMove->id = st->id;
