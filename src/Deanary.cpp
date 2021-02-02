@@ -43,9 +43,9 @@ void Deanary::addMarksToAll() {
     for (auto &st : gr->students) {
       Sleep(30);
       PRNG *gen_low_mark = new PRNG;
-      initGenerator(*gen_low_mark);
-      int low_mark = random(*gen_low_mark, 1, 4);
-      int high_mark = random(*gen_low_mark, 8, 10);
+      initGenerator(gen_low_mark);
+      int low_mark = random(gen_low_mark, 1, 4);
+      int high_mark = random(gen_low_mark, 8, 10);
       sleep(1);
       PRNG *generator = new PRNG;
       std::string whichMark = "normal";

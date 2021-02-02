@@ -79,7 +79,7 @@ void Group::removeStudent(int stId) {
   if (st->isHeadOfGroup()) {
     isHead = true;
   }
-  removeFromVec(students, stIndexInVec);
+  removeFromVec(&students, stIndexInVec);
   if (isHead) {
     chooseHead(students);
   }
@@ -96,8 +96,8 @@ Student *Group::chooseHead(const std::vector<Student *> &newStudents) {
     }
   } else {
     PRNG *generator = new PRNG;
-    initGenerator(*generator);
-    int idHead = random(*generator, beginId, endId);
+    initGenerator(generator);
+    int idHead = random(generator, beginId, endId);
     for (auto &st : newStudents) {
       if (st->getStId() == idHead) {
         return st;
