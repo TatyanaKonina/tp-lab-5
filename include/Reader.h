@@ -13,7 +13,7 @@ class Reader {
   using json = nlohmann::json;
   std::map<std::string, std::string> parseGrSp(const json &file);
   std::vector<std::vector<std::string>> parseFI(const json &file);
-  void saveStaff(Deanary *d, const json &file);
+  void saveStaff(Deanary *d, json &file);
 };
 
 #endif //  INCLUDE_READER_H_
