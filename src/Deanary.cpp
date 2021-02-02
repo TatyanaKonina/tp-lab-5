@@ -1,5 +1,5 @@
 ////// Copyright 2021 Ozhiganova Polina
-#include "../include/Deanary.h"
+#include "Deanary.h"
 
 Deanary::~Deanary() {
   for (auto &gr : groups) {
