@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include "include/Student.h"
 #include "include/Group.h"
-#include "include/Deanery.h"
+#include "include/Deanary.h"
 #include "include/Reader.h"
 
 TEST(Student, check_empty_const) {
