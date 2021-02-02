@@ -2,7 +2,7 @@
 
 #include<iostream>
 #include <fstream>
-#include "Deanery.h"
+#include "Deanary.h"
 #include "Student.h"
 #include "Group.h"
 #include "Data.h"
