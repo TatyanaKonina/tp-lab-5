@@ -2,8 +2,6 @@
 
 #include "Student.h"
 #include "Group.h"
-//#include "Deanery.h"
-
 
 Student::Student(unsigned int id, std::string fio, std::vector <unsigned int> marks, std::string spec) {
   this->fio = fio;
@@ -13,7 +11,6 @@ Student::Student(unsigned int id, std::string fio, std::vector <unsigned int> ma
   this->marks = marks;
   this->spec = spec;
 }
-
 
 void Student::addMark(unsigned int mark) {
   marks.push_back(mark);
