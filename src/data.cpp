@@ -1,7 +1,7 @@
-#include "data.h"
+// Copyright 2020 Konina Tatiana
 #include <fstream>
 #include <iostream>
-
+#include "data.h"
 enum  data_in_file {
   ID = 0,
   FIO,
@@ -36,14 +36,12 @@ std::vector<std::map<int, std::string>> read_st(std::string input) {
       curentStudent.clear();
     }
     return data;
-  }
-  else {
+  } else {
     throw "file error";
   }
 }
 std::vector<std::string> read_spec(std::string input) {
   std::ifstream file(input);
-
   if (file.is_open()) {
     std::vector<std::string> specList;
     std::string buf = "";
@@ -51,10 +49,8 @@ std::vector<std::string> read_spec(std::string input) {
       specList.push_back(buf);
     }
     return specList;
-  }
-  else {
+  } else {
     throw "file error";
   }
-  
 }
 
