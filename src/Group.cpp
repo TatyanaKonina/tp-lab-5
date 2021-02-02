@@ -11,6 +11,16 @@ Group::Group(std::string newTitle,
   this->head = newHead;
 }
 
+Group::~Group() {
+  for (auto &st:students) {
+    st->~Student();
+  }
+  this->title.clear();
+  this->spec.clear();
+  this->students.clear();
+  this->head = nullptr;
+}
+
 bool Group::containStudent(int stId) {
   for (auto &st:students) {
     if (st->getStId() == stId) {
@@ -71,13 +81,7 @@ void Group::removeStudent(int stId) {
   if (st->isHeadOfGroup()) {
     isHead = true;
   }
-
-  //  st->id = 0;
-  //  st->fio = nullptr;
-  //  st->group = nullptr;
-  //  st->marks = static_cast<const std::vector<int>>(0);
-
-  removeFromVec(students, stIndexInVec);  // del from students vec
+  removeFromVec(students, stIndexInVec);
   if (isHead) {
     chooseHead(students);
   }
@@ -86,18 +90,20 @@ void Group::removeStudent(int stId) {
 Student *Group::chooseHead(const std::vector<Student *> &newStudents) {
   int beginId = newStudents[0]->getStId();
   int endId = newStudents[newStudents.size() - 1]->getStId();
-  if (beginId < endId) { //////////////////////////////////////////////////////////////
-    int tmp;
-    tmp = beginId;
-    beginId = endId;
-    endId = tmp;
-  }
-  PRNG *generator = new PRNG;
-  initGenerator(*generator);
-  int idHead = random(*generator, beginId, endId);
-  for (auto &st:newStudents) {
-    if (st->getStId() == idHead) {
-      return st;
+  if (beginId > endId) {
+    for (auto &st:newStudents) {
+      if (st->getStId() == beginId) {
+        return st;
+      }
+    }
+  } else {
+    PRNG *generator = new PRNG;
+    initGenerator(*generator);
+    int idHead = random(*generator, beginId, endId);
+    for (auto &st:newStudents) {
+      if (st->getStId() == idHead) {
+        return st;
+      }
     }
   }
   return nullptr;
@@ -109,4 +115,8 @@ std::vector<Student *> Group::getStudents() {
 
 std::string Group::getSpec() {
   return this->spec;
+}
+
+std::string Group::getTitle() {
+  return this->title;
 }

@@ -31,6 +31,13 @@ Student::Student() {
   this->fio = "";
 }
 
+Student::~Student() {
+  this->id = 0;
+  this->fio.clear();
+  this->marks.clear();
+  this->group = nullptr;
+}
+
 bool Student::isHeadOfGroup() {
   Student *isItHead = group->head;
   if (isItHead->fio == this->fio) {
@@ -41,6 +48,9 @@ bool Student::isHeadOfGroup() {
 }
 
 float Student::getAverageMark() {
+  if (this->marks.empty()) {
+    return 0.0;
+  }
   float sum = 0.0;
   for (auto num:this->marks) {
     sum += num;
@@ -58,14 +68,17 @@ unsigned random(PRNG &generator, unsigned minValue, unsigned maxValue) {
   return (generator.seed % (maxValue + 1 - minValue)) + minValue;
 }
 
-void Student::addMark(PRNG *generator, bool addBadMarks) {
+void Student::addMarksInit(PRNG *generator, const std::string &whichMark) {
   std::vector<int> vec;
   initGenerator(*generator);
   for (int i = 0; i < 15; ++i) {
-    if (addBadMarks) {
+    if (whichMark == "low") {
       int mark = random(*generator, 0, 4);
       vec.push_back(mark);
-    } else {
+    } else if (whichMark == "high") {
+      int mark = random(*generator, 8, 10);
+      vec.push_back(mark);
+    } else if (whichMark == "normal") {
       int mark = random(*generator, 1, 10);
       vec.push_back(mark);
     }
@@ -88,4 +101,7 @@ std::string Student::getStNamed() const {
 
 std::string Student::getStSpec() const {
   return this->group->getSpec();
+}
+void Student::addMark(int mark) {
+  this->marks.push_back(mark);
 }

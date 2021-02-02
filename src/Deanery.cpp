@@ -1,12 +1,18 @@
 ////// Copyright 2021 Ozhiganova Polina
-#include <thread>
 #include "Deanery.h"
 
-std::vector<Student *> Deanery::hireStudents(const std::vector<std::string> &namesFI) {
+Deanery::~Deanery() {
+  for (auto &gr:groups) {
+    gr->~Group();
+  }
+}
+
+std::vector<Student *> Deanery::hireStudents
+    (const std::vector<std::string> &namesFI) {
   std::vector<Student *> newStudents;
   for (auto &fi : namesFI) {
     UniqueID *newId = new UniqueID;
-    Student *newSt = new Student(fi, newId); // create new student
+    Student *newSt = new Student(fi, newId);
     newStudents.push_back(newSt);
   }
   return newStudents;
@@ -20,7 +26,8 @@ void Deanery::createGroups(const std::map<std::string, std::string> &nameGrSp,
     std::vector<Student *> newStudents;
     newStudents = hireStudents(namesFI[i]);
     Student *newHead = initHeads(gr, newStudents);
-    Group *newGr = new Group(it->first, it->second, newStudents, newHead);
+    Group *newGr = new Group(it->first, it->second,
+                             newStudents, newHead);
     for (auto &st:newStudents) {
       st->addToGroup(st, newGr);
     }
@@ -32,41 +39,112 @@ void Deanery::addMarksToAll() {
   std::vector<int> marks;
   for (auto &gr:groups) {
     for (auto &st:gr->students) {
-      std::this_thread::sleep_for(std::chrono::milliseconds(30));
+      std::this_thread::sleep_for
+          (std::chrono::milliseconds(30));
       PRNG *gen_low_mark = new PRNG;
       initGenerator(*gen_low_mark);
       int low_mark = random(*gen_low_mark, 1, 4);
+      int high_mark = random(*gen_low_mark, 8, 10);
       sleep(1);
       PRNG *generator = new PRNG;
-      bool addBadMarks = false;
+      std::string whichMark = "normal";
       if (low_mark == 1) {
-        addBadMarks = true;
-        st->addMark(generator, addBadMarks);
+        whichMark = "low";
+        st->addMarksInit(generator, whichMark);
+      } else if (high_mark == 8) {
+        whichMark = "high";
+        st->addMarksInit(generator, whichMark);
       } else {
-        st->addMark(generator, addBadMarks);
+        st->addMarksInit(generator, whichMark);
       }
-
     }
   }
 }
-// print amount and направление (BI...)
-// ask what to do
-// do some actions
+
 void Deanery::getStatistics(STATISTICS statistics) {
-//  if (statistics == FIRE) {
-//
-//  } else if (statistics == REWARD) {
-//
-//  } else if (statistics == PUNISH) {
-//
-//  }
+  bprinter::TablePrinter tp(&std::cout);
+  tp.AddColumn("STUDENTS", 28);
+  tp.AddColumn("SPEC", 5);
+  tp.AddColumn("AVERAGE MARK", 15);
+  if (statistics == FIRE) {
+    std::vector<Student *> stsFire = getStatisticsFire();
+    if (!stsFire.empty()) {
+      std::cout << ">> Will be FIRED: " << stsFire.size()
+                << " students." << std::endl;
+      tp.PrintHeader();
+      for (auto &st:stsFire) {
+        tp << st->getStNamed() << st->getStSpec() << st->getAverageMark();
+      }
+      tp.PrintFooter();
+      fireStudents(stsFire);
+    }
+  } else if (statistics == REWARD) {
+    std::map<std::vector<Student *>, std::string> stsMove
+        = getStatisticsReward();
+    for (auto &obj1:stsMove) {
+      if (!obj1.first.empty()) {
+        std::cout << std::endl << ">> Will be MOVED (Reward): " << std::endl;
+        tp.AddColumn("MOVE TO", 7);
+        tp.PrintHeader();
+        for (auto &el:stsMove) {
+          for (auto &stName:el.first) {
+            tp << stName->getStNamed() << stName->getStSpec() << stName->getAverageMark() << el.second;
+          }
+          tp.PrintFooter();
+          moveStudents(el.first, el.second);
+        }
+        break;
+      }
+    }
+  } else if (statistics == PUNISH) {
+    std::map<std::vector<Student *>, std::string>
+        stsMove = getStatisticsPunish();
+    for (auto &obj1:stsMove) {
+      if (!obj1.first.empty()) {
+        std::cout << ">> Will be MOVED (Punish): " << std::endl;
+        tp.AddColumn("MOVE TO", 7);
+        tp.PrintHeader();
+        for (auto &el:stsMove) {
+          for (auto &stName:el.first) {
+            tp << stName->getStNamed() << stName->getStSpec() << stName->getAverageMark() << el.second;
+          }
+          tp.PrintFooter();
+          moveStudents(el.first, el.second);
+        }
+        break;
+      }
+    }
+  }
 }
 
-std::map<std::vector<Student *>, std::string> Deanery::getStatisticsPunish() {
+std::map<std::vector<Student *>,
+         std::string> Deanery::getStatisticsReward() {
+  std::vector<Student *> stsHigherBI;
+  std::vector<Student *> stsHigherPMI;
+  std::map<std::vector<Student *>, std::string> stsToGrMove;
+  for (auto &gr:groups) {
+    for (auto &st:gr->students) {
+      // so-so --> move to higher group
+      if (st->getAverageMark() >= 8) {
+        if (st->group->spec == "PI") {
+          continue;
+        } else if (st->group->spec == "PMI") {
+          stsHigherPMI.push_back(st);
+        } else if (st->group->spec == "BI") {
+          stsHigherBI.push_back(st);
+        }
+      }
+    }
+  }
+  stsToGrMove[stsHigherPMI] = "PI";
+  stsToGrMove[stsHigherBI] = "PMI";
+  return stsToGrMove;
+}
+
+std::map<std::vector<Student *>,
+         std::string> Deanery::getStatisticsPunish() {
   float generalAverageMark = 0.0;
-  std::string lowerPI;
   std::vector<Student *> stsLowerPI;
-  std::string lowerPMI;
   std::vector<Student *> stsLowerPMI;
   std::map<std::vector<Student *>, std::string> stsToGrMove;
   for (auto &gr:groups) {
@@ -74,14 +152,14 @@ std::map<std::vector<Student *>, std::string> Deanery::getStatisticsPunish() {
     for (auto &st:gr->students) {
       // so-so --> move to lower group
       if (st->getAverageMark() < generalAverageMark) {
-        if (st->group->spec == "PI") {  // to PMI
+        if (st->group->spec == "PI") {
           stsLowerPI.push_back(st);
-        } else if (st->group->spec == "PMI") {  // to BI
+        } else if (st->group->spec == "PMI") {
           stsLowerPMI.push_back(st);
-        } else if (st->group->spec == "BI") {  // stay here ;(
+        } else if (st->group->spec == "BI") {
           continue;
         }
-      } /////////////////////////////////////////////////////  whrite smth more
+      }
     }
   }
   stsToGrMove[stsLowerPI] = "PMI";
@@ -90,12 +168,11 @@ std::map<std::vector<Student *>, std::string> Deanery::getStatisticsPunish() {
 }
 
 std::vector<Student *> Deanery::getStatisticsFire() {
-  float generalAverageMark = 0.0;
   std::vector<Student *> stsToFire;
   for (auto &gr:groups) {
-    generalAverageMark = gr->getAverageMark();
     for (auto &st:gr->students) {
-      if (st->getAverageMark() <= 3) {  // very bad marks  --> fire
+      // very bad marks  --> fire
+      if (st->getAverageMark() <= 3) {
         stsToFire.push_back(st);
       }
     }
@@ -103,7 +180,8 @@ std::vector<Student *> Deanery::getStatisticsFire() {
   return stsToFire;
 }
 
-void Deanery::moveStudents(const std::vector<Student *> &sts, const std::string &newGr) {
+void Deanery::moveStudents(const std::vector<Student *> &sts,
+                           const std::string &newGr) {
   std::vector<Student *> stsToMove;
   Group *newGroup;
   for (auto &gr:groups) {
@@ -134,14 +212,39 @@ void Deanery::fireStudents(const std::vector<Student *> &sts) {
   }
 }
 
-void Deanery::saveStaff() {   ////////////////////////////
-
-}
-
-Student *Deanery::initHeads(Group *gr, const std::vector<Student *> &newStudents) {
+Student *Deanery::initHeads
+    (Group *gr, const std::vector<Student *> &newStudents) {
   return gr->chooseHead(newStudents);
 }
 
 std::vector<Group *> Deanery::getGroups() {
   return this->groups;
+}
+
+void Deanery::printGroupSize() {
+  bprinter::TablePrinter tp(&std::cout);
+  tp.AddColumn("GROUP", 15);
+  tp.AddColumn("SIZE", 5);
+  std::vector<Group *> grs = getGroups();
+
+  tp.PrintHeader();
+  for (auto &gr:grs) {
+    tp << gr->getSpec() << gr->getStudents().size();
+  }
+  tp.PrintFooter();
+}
+
+void Deanery::addMarkToSt(int mark, int stId) {
+  Student *st = nullptr;
+  for (auto &gr:groups) {
+    st = gr->getStudent(stId);
+    if (st) {
+      break;
+    }
+  }
+  st->addMark(mark);
+}
+
+int Deanery::getGrsSize() {
+  return this->getGroups().size();
 }
