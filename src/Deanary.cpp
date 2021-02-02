@@ -45,8 +45,7 @@ void Deanery::hireStudent(std::string input) {
       marks.push_back(stoi(data[i][MARKS].substr(0, pos)));
       Student* st = new Student(stoi(data[i][ID]),
                                 data[i][FIO], marks, data[i][SPEC]);
-      unsigned int seed;
-      int randGroup = rand_r(&seed)  % specList[data[i][SPEC]] + 1;
+      int randGroup = std::rand()  % specList[data[i][SPEC]] + 1;
       for (auto group : groups) {
         if (group->getSpec() == st->getSpec() &&
             group->getTitle() == randGroup) {
@@ -86,7 +85,7 @@ void  Deanery::printStudents() const {
 void Deanery::addMarksToAll(Group * group) const {
   for (auto st : group->getStudents()) {
     unsigned int seed;
-    int randomMark = rand_r(&seed) % 10;
+    int randomMark = std::rand() % 10;
     st.second->addMark(randomMark);
   }
 }
