@@ -1,7 +1,7 @@
 // Copyright 2020 Konina Tatiana
 #include <fstream>
 #include <iostream>
-#include "data.h"
+#include "Data.h"
 enum  data_in_file {
   ID = 0,
   FIO,
@@ -10,8 +10,6 @@ enum  data_in_file {
   HEAD,
   GROUP_NUM
 };
-
-std::string token = ",";
 
 std::string findToken(std::string tok, std::string delimiter,std::string buf) {
   size_t pos1 = buf.find(tok);
@@ -29,13 +27,13 @@ std::vector<std::map<int, std::string>> read_st(std::string input) {
     while (getline(file, buf)) {
       std::map<int, std::string > curentStudent;
       curentStudent.insert(std::pair<int,
-                           std::string>(ID, findToken("id", token, buf)));
+                           std::string>(ID, findToken("id", ",", buf)));
       curentStudent.insert(std::pair<int,
-                           std::string>(FIO, findToken("fio", token, buf)));
+                           std::string>(FIO, findToken("fio", ",", buf)));
       curentStudent.insert(std::pair<int,
-                           std::string>(MARKS, findToken("marks", token, buf)));
+                           std::string>(MARKS, findToken("marks", ",", buf)));
       curentStudent.insert(std::pair<int,
-                           std::string>(SPEC, findToken("spec", token, buf)));
+                           std::string>(SPEC, findToken("spec", ",", buf)));
       data.push_back(curentStudent);
       curentStudent.clear();
     }
