@@ -60,10 +60,10 @@ void Group::addStudent(Student *st, Group *gr) {
   st->addToGroup(st, gr);
 }
 
-void removeFromVec(std::vector<Student *> &vec, size_t pos) {
-  auto it = vec.begin();
+void removeFromVec(std::vector<Student *> *vec, size_t pos) {
+  auto it = vec->begin();
   std::advance(it, pos);
-  vec.erase(it);
+  vec->erase(it);
 }
 
 void Group::removeStudent(int stId) {

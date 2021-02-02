@@ -41,8 +41,7 @@ void Deanary::addMarksToAll() {
   std::vector<int> marks;
   for (auto &gr : groups) {
     for (auto &st : gr->students) {
-      std::this_thread::sleep_for
-          (std::chrono::milliseconds(30));
+      Sleep(30);
       PRNG *gen_low_mark = new PRNG;
       initGenerator(*gen_low_mark);
       int low_mark = random(*gen_low_mark, 1, 4);
@@ -108,7 +107,7 @@ void Deanary::getStatistics(STATISTICS statistics) {
         tp.AddColumn("MOVE TO", 7);
         tp.PrintHeader();
         for (auto &el : stsMove) {
-          for (auto &stName:el.first) {
+          for (auto &stName : el.first) {
             tp << stName->getStNamed() << stName->getStSpec()
                << stName->getAverageMark() << el.second;
           }
@@ -197,14 +196,14 @@ void Deanary::moveStudents(const std::vector<Student *> &sts,
 
   for (auto &st:sts) {
     Student *stMove = new Student;
-    // save all info
+    //  save all info
     stMove->id = st->id;
     stMove->fio = st->fio;
     stMove->group = newGroup;
     stMove->marks = st->marks;
-    // del from group
+    //  del from group
     st->group->removeStudent(st->id);
-    // add to new
+    //  add to new
     newGroup->addStudent(stMove, newGroup);
   }
 }

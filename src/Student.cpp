@@ -58,28 +58,28 @@ float Student::getAverageMark() {
   return sum / marks.size();
 }
 
-void initGenerator(PRNG &generator) {
-  generator.seed = unsigned(std::time(nullptr));
+void initGenerator(PRNG *generator) {
+  generator->seed = unsigned(std::time(nullptr));
 }
 
-unsigned random(PRNG &generator, unsigned minValue, unsigned maxValue) {
+unsigned random(PRNG *generator, unsigned minValue, unsigned maxValue) {
   assert(minValue < maxValue);
-  generator.seed = (generator.seed * 73129 + 95121);
-  return (generator.seed % (maxValue + 1 - minValue)) + minValue;
+  generator->seed = (generator->seed * 73129 + 95121);
+  return (generator->seed % (maxValue + 1 - minValue)) + minValue;
 }
 
 void Student::addMarksInit(PRNG *generator, const std::string &whichMark) {
   std::vector<int> vec;
-  initGenerator(*generator);
+  initGenerator(generator);
   for (int i = 0; i < 15; ++i) {
     if (whichMark == "low") {
-      int mark = random(*generator, 0, 4);
+      int mark = random(generator, 0, 4);
       vec.push_back(mark);
     } else if (whichMark == "high") {
-      int mark = random(*generator, 8, 10);
+      int mark = random(generator, 8, 10);
       vec.push_back(mark);
     } else if (whichMark == "normal") {
-      int mark = random(*generator, 1, 10);
+      int mark = random(generator, 1, 10);
       vec.push_back(mark);
     }
   }
