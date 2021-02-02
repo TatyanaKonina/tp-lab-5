@@ -16,4 +16,4 @@ class Reader {
   void saveStaff(Deanary *d, json &file);
 };
 
-#endif //  INCLUDE_READER_H_
+#endif  // INCLUDE_READER_H_

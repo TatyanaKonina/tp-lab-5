@@ -24,8 +24,8 @@ class UniqueID {
 struct PRNG {
   unsigned seed = 0;
 };
-void initGenerator(PRNG &generator);
-unsigned random(PRNG &generator, unsigned minValue, unsigned maxValue);
+void initGenerator(PRNG *generator);
+unsigned random(PRNG *generator, unsigned minValue, unsigned maxValue);
 
 class Group;
 class Student {
@@ -55,4 +55,4 @@ class Student {
   void addMark(int mark);
 };
 
-#endif //  INCLUDE_STUDENT_H_
+#endif  // INCLUDE_STUDENT_H_

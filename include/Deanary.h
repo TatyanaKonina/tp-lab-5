@@ -1,16 +1,16 @@
 //// Copyright 2021 Ozhiganova Polina
-#ifndef INCLUDE_DEANERY_H_
-#define INCLUDE_DEANERY_H_
-#include <iostream>
-#include <thread>
+#ifndef INCLUDE_DEANARY_H_
+#define INCLUDE_DEANARY_H_
+#include "Student.h"
+#include "Group.h"
 #include <zconf.h>
+#include <bprinter/table_printer.h>
+#include <iostream>
+#include <windows.h>
 #include <vector>
 #include <string>
 #include <map>
-#include <bprinter/table_printer.h>
 #include <src/external/json.hpp>
-#include "Student.h"
-#include "Group.h"
 
 enum STATISTICS {
   FIRE,
@@ -19,7 +19,6 @@ enum STATISTICS {
 };
 
 class Deanary {
- 
  public:
   ~Deanary();
   std::vector<Student *> hireStudents(const std::vector<std::string> &namesFI);
@@ -44,4 +43,4 @@ class Deanary {
   std::vector<Group *> groups;
 };
 
-#endif //  INCLUDE_DEANERY_H_
+#endif  // INCLUDE_DEANARY_H_
