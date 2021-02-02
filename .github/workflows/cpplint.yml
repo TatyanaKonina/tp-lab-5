@@ -10,5 +10,5 @@ jobs:
     - uses: actions/setup-python@v2
     - run: pip install cpplint
     - run: cpplint --recursive .
-cpplint --exclude ./external/bprinter/
-cpplint --exclude ./include/json.hpp
+    - run: cpplint --exclude ./external/bprinter/
+    - run: cpplint --exclude ./include/json.hpp
