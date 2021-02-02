@@ -1,8 +1,9 @@
 // Copyright 2020 Konina Tatiana
+#include <iostream>
 #include "Deanery.h"
 #include "Student.h"
 #include "Group.h"
-#include <iostream>
+
 int main() {
   Deanery* test = new Deanery("specList.txt","students.txt");
   test->initHeads();
@@ -12,3 +13,4 @@ int main() {
  
   return 0;
 }
+
