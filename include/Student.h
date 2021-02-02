@@ -30,7 +30,7 @@ unsigned random(PRNG &generator, unsigned minValue, unsigned maxValue);
 class Group;
 class Student {
   friend class Group;
-  friend class Deanery;
+  friend class Deanary;
 
  public:
   explicit Student(std::string newFio, UniqueID *newId);
