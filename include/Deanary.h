@@ -3,7 +3,6 @@
 #define INCLUDE_DEANARY_H_
 #include "Student.h"
 #include "Group.h"
-#include "src/external/windows.h"
 #include <zconf.h>
 #include <bprinter/table_printer.h>
 #include <iostream>
