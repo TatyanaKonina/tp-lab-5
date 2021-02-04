@@ -3,7 +3,7 @@
 #include "Student.h"
 #include "Group.h"
 #include "Deanary.h"
-#include "Reader.h"
+#include "reader/Reader.h"
 
 TEST(Student, check_empty_const) {
 Student student;
