@@ -1,6 +1,6 @@
 //// Copyright 2021 Ozhiganova Polina
 #include <sstream>
-#include "src/external/Reader.h"
+#include "reader/Reader.h"
 
 std::map<std::string, std::string> Reader::parseGrSp
     (const json &file) {

@@ -63,20 +63,17 @@ void Deanary::addMarksToAll() {
 }
 
 void Deanary::getStatistics(STATISTICS statistics) {
-  bprinter::TablePrinter tp(&std::cout);
-  tp.AddColumn("STUDENTS", 28);
-  tp.AddColumn("SPEC", 5);
-  tp.AddColumn("AVERAGE MARK", 15);
   if (statistics == FIRE) {
     std::vector<Student *> stsFire = getStatisticsFire();
     if (!stsFire.empty()) {
       std::cout << ">> Will be FIRED: " << stsFire.size()
                 << " students." << std::endl;
-      tp.PrintHeader();
       for (auto &st : stsFire) {
-        tp << st->getStNamed() << st->getStSpec() << st->getAverageMark();
+        std::cout << "NAME: " << st->getStNamed() << " ("
+                  << st->getStSpec() << ") " << "   AVERAGE MARK: "
+                  << st->getAverageMark() << "\n";
       }
-      tp.PrintFooter();
+      std::cout << std::endl;
       fireStudents(stsFire);
     }
   } else if (statistics == REWARD) {
@@ -85,14 +82,13 @@ void Deanary::getStatistics(STATISTICS statistics) {
     for (auto &obj1 : stsMove) {
       if (!obj1.first.empty()) {
         std::cout << std::endl << ">> Will be MOVED (Reward): " << std::endl;
-        tp.AddColumn("MOVE TO", 7);
-        tp.PrintHeader();
         for (auto &el : stsMove) {
           for (auto &stName : el.first) {
-            tp << stName->getStNamed() << stName->getStSpec()
-               << stName->getAverageMark() << el.second;
+            std::cout << "NAME: " << stName->getStNamed() << " ("
+                      << stName->getStSpec() << ") " << "   AVERAGE MARK: "
+                      << stName->getAverageMark() << std::endl;
           }
-          tp.PrintFooter();
+          std::cout << "MOVE TO: " << el.second << "\n\n";
           moveStudents(el.first, el.second);
         }
         break;
@@ -104,14 +100,14 @@ void Deanary::getStatistics(STATISTICS statistics) {
     for (auto &obj1 : stsMove) {
       if (!obj1.first.empty()) {
         std::cout << ">> Will be MOVED (Punish): " << std::endl;
-        tp.AddColumn("MOVE TO", 7);
-        tp.PrintHeader();
         for (auto &el : stsMove) {
           for (auto &stName : el.first) {
-            tp << stName->getStNamed() << stName->getStSpec()
-               << stName->getAverageMark() << el.second;
+            std::cout << "NAME: " << stName->getStNamed() << " ("
+                      << stName->getStSpec() << ") "
+                      << "   AVERAGE MARK: " << stName->getAverageMark()
+                      << std::endl;
           }
-          tp.PrintFooter();
+          std::cout << "MOVE TO: " << el.second << "\n\n";
           moveStudents(el.first, el.second);
         }
         break;
@@ -224,16 +220,13 @@ std::vector<Group *> Deanary::getGroups() {
 }
 
 void Deanary::printGroupSize() {
-  bprinter::TablePrinter tp(&std::cout);
-  tp.AddColumn("GROUP", 15);
-  tp.AddColumn("SIZE", 5);
   std::vector<Group *> grs = getGroups();
-
-  tp.PrintHeader();
   for (auto &gr : grs) {
-    tp << gr->getSpec() << gr->getStudents().size();
+    std::cout << "GROUP: " << gr->getSpec()
+              << "   SIZE: " << gr->getStudents().size()
+              << std::endl;
   }
-  tp.PrintFooter();
+  std::cout << std::endl;
 }
 
 void Deanary::addMarkToSt(int mark, int stId) {

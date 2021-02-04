@@ -1,11 +1,11 @@
 ////// Copyright 2021 Ozhiganova Polina
 #include <iostream>
-#include "Reader.h"
+#include "reader/Reader.h"
 
 int main() {
   //  WORK WITH FILE
   Reader *r = new Reader;
-  std::ifstream f("groups.json");
+  std::ifstream f(R"(C:\Lab_5_test\src\groups.json)");
   if (!f.is_open()) {
     std::cout << "*** Error opening file ***";
     exit(1);
@@ -24,9 +24,9 @@ int main() {
   // ADD MARK TO A CURTAIN STUDENT
   d->addMarkToSt(10, 1);
   /*       MOVE ST-S
-   * REWARD --> student av.mark is >= 8
-   * PUNISH --> student av.mark is < group av.mark
-   * FIRE --> student av.mark is <= 3
+   *  REWARD --> student av.mark is >= 8
+   *  PUNISH --> student av.mark is < group av.mark
+   *  FIRE --> student av.mark is <= 3
   */
   STATISTICS statistics1 = REWARD;
   d->getStatistics(statistics1);
@@ -39,7 +39,7 @@ int main() {
   //  END OF WORK
   nlohmann::json finaleFile;
   r->saveStaff(d, finaleFile);
-  // CLEAN
+  //  CLEAN
   d->~Deanary();
   return 0;
 }
