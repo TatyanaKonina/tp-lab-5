@@ -65,6 +65,6 @@ void Reader::saveStaff(Deanary *d, json &file) {
     finale_data[grTitleSpec] = fioVec;
     file[grTitleSpec] = fioVec;
   }
-  std::ofstream o(R"(C:\Lab_5_test\src\output.json)");
+  std::ofstream o("output.json");
   o << file << std::endl;
 }
