@@ -4,13 +4,11 @@
 #include "Student.h"
 #include "Group.h"
 #include <zconf.h>
-#include <bprinter/table_printer.h>
 #include <iostream>
-
 #include <vector>
 #include <string>
 #include <map>
-#include <src/external/json.hpp>
+#include "external/json.hpp"
 
 enum STATISTICS {
   FIRE,
