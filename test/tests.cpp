@@ -1,9 +1,9 @@
 ////// Copyright 2021 Ozhiganova Polina
 #include <gtest/gtest.h>
-#include "include/Student.h"
-#include "include/Group.h"
-#include "include/Deanary.h"
-#include "include/Reader.h"
+#include "Student.h"
+#include "Group.h"
+#include "Deanary.h"
+#include "Reader.h"
 
 TEST(Student, check_empty_const) {
 Student student;
