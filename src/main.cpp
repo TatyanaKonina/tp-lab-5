@@ -5,7 +5,7 @@
 int main() {
   //  WORK WITH FILE
   Reader *r = new Reader;
-  std::ifstream f(R"(C:\Lab_5_test\src\groups.json)");
+  std::ifstream f("groups.json");
   if (!f.is_open()) {
     std::cout << "*** Error opening file ***";
     exit(1);
