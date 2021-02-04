@@ -1,6 +1,6 @@
 //// Copyright 2021 Ozhiganova Polina
 #include <sstream>
-#include "Reader.h"
+#include "src/external/Reader.h"
 
 std::map<std::string, std::string> Reader::parseGrSp
     (const json &file) {
@@ -65,6 +65,6 @@ void Reader::saveStaff(Deanary *d, json &file) {
     finale_data[grTitleSpec] = fioVec;
     file[grTitleSpec] = fioVec;
   }
-  std::ofstream o("output.json");
+  std::ofstream o(R"(C:\Lab_5_test\src\output.json)");
   o << file << std::endl;
 }
