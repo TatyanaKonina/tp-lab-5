@@ -155,7 +155,7 @@ void Deanery::updateInfo(std::string output) const {
   fout.close();
 }
 Group* Deanery::findGroup(std::string spec, int title) {
-  for (Group* group : this->groups) {
+  for (auto& group : groups) {
     if (group->getSpec() == spec && group->getTitle() == title) {
       return &(*group);
     }
