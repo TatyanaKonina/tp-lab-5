@@ -1,7 +1,7 @@
 // Copyright 2020 Konina Tatiana
 
 #include <gtest/gtest.h>
-#include "Data.h"
+#include <string>
 #include "Student.h"
 #include "Group.h"
 #include "Deanary.h"
