@@ -1,6 +1,7 @@
+// Copyright 2020 Konina Tatiana
+#include <stdlib.h>
 #include<iostream>
 #include <fstream>
-#include <stdlib.h>
 #include "Deanary.h"
 #include "Student.h"
 #include "Group.h"
@@ -94,8 +95,7 @@ bool Deanery::moveStudent(unsigned int id) {
         }
       }
       return true;
-    }
-    else {
+    } else {
       continue;
     }
   }
@@ -164,8 +164,7 @@ Student* Deanery::findStudent(unsigned int id) {
   for (Group* group : groups) {
     if (Student* st = group->search(id)) {
       return st;
-    }
-    else {
+    } else {
       continue;
     }
   }
