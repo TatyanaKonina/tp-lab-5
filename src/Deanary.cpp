@@ -37,7 +37,7 @@ void Deanery::hireStudent(std::string input) {
       marks.push_back(stoi(data[i]["marks"].substr(0, pos)));
       Student* st = new Student(stoi(data[i]["id"]),
         data[i]["fio"], marks, data[i]["spec"]);
-      int randGroup = std::rand() % specList[data[i]["spec"]] + 1;
+     /* int randGroup = std::rand() % specList[data[i]["spec"]] + 1;
       for (Group* group : groups) {
         if (group->getSpec() == st->getSpec() &&
           group->getTitle() == randGroup) {
@@ -48,7 +48,7 @@ void Deanery::hireStudent(std::string input) {
             groups.push_back(tmp);
           }
         }
-      }
+      }*/
     }
   }
 }
