@@ -61,6 +61,7 @@ TEST(d_test, test7) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   test->initHeads();
   Group* gr = test->findGroup("Masochist club(algorithms)", 1);
+  test->printGroups();
   EXPECT_EQ(5, gr->getHead());
   delete gr;
   delete test;
