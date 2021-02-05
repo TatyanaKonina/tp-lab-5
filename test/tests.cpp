@@ -51,7 +51,7 @@ TEST(gr_test, test5) {
 
 TEST(gr_test, test6) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
- Group* gr = test->getGroups()[1];
+  Group* gr = test->getGroups()[1];
   EXPECT_EQ(-1, gr->getHead());
   delete gr;
   delete test;
@@ -59,7 +59,7 @@ TEST(gr_test, test6) {
 TEST(d_test, test7) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   test->initHeads();
- Group* gr = test->getGroups()[1];
+  Group* gr = test->getGroups()[1];
   test->printGroups();
   EXPECT_EQ(5, gr->getHead());
   delete gr;
