@@ -15,8 +15,8 @@ std::vector<std::map<std::string, std::string>> read_st(std::string input) {
   std::ifstream file(input);
 
   if (file.is_open()) {
-    std::vector<std::map<std::string, std::string>> data;
-    std::string buf = "";
+    std::vector<std::map<std::string, std::string>> data = { {{"id","1"},{"fio","dldl"},{"marks","1 2 3"},{"spec","Pure Magic(python)"} } };
+    /*std::string buf = "";
     while (getline(file, buf)) {
       std::map<std::string, std::string > curentStudent;
       curentStudent.insert(std::pair<std::string,
@@ -29,7 +29,7 @@ std::vector<std::map<std::string, std::string>> read_st(std::string input) {
         std::string>("spec", findToken("spec", ",", buf)));
       data.push_back(curentStudent);
       curentStudent.clear();
-    }
+    }*/
     return data;
   } else {
     throw "file error";
