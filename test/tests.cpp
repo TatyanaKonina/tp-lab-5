@@ -8,8 +8,8 @@
 
 
 TEST(st_test, test1) {
-  Deanery* d = new Deanery("specList.txt", "students.txt");
-  Student* st = d->findStudent(2);
+  Deanery* d = new Deanery("specList.txt");
+ // Student* st = d->findStudent(2);
   EXPECT_EQ(2, 2);
 //  delete st;
 //  delete d;
