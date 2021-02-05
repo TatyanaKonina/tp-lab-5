@@ -1,7 +1,7 @@
 // Copyright 2020 Konina Tatiana
 #include <fstream>
 #include <iostream>
-#include "data.h"
+#include "Data.h"
 
 
 std::string findToken(std::string tok, std::string delimiter, std::string buf) {
@@ -31,8 +31,7 @@ std::vector<std::map<std::string, std::string>> read_st(std::string input) {
       curentStudent.clear();
     }
     return data;
-  }
-  else {
+  } else {
     throw "file error";
   }
 }
@@ -45,8 +44,7 @@ std::vector<std::string> read_spec(std::string input) {
       specList.push_back(buf);
     }
     return specList;
-  }
-  else {
+  } else {
     throw "file error";
   }
 }
