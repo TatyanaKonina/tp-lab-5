@@ -9,10 +9,10 @@
 
 TEST(st_test, test1) {
   Deanery* d = new Deanery("specList.txt", "students.txt");
- // Student* st = d->findStudent(2);
+  Student* st = d->findStudent(2);
   EXPECT_EQ(2, 2);
-//  delete st;
-//  delete d;
+  delete st;
+  delete d;
 }
 
 TEST(st_test, test2) {
@@ -28,7 +28,7 @@ TEST(st_test, test3) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   Student* st = test->findStudent(2);
 
-  EXPECT_EQ(true, st->isHeadOfGroup());
+  EXPECT_EQ(false, st->isHeadOfGroup());
   delete st;
   delete test;
 }
@@ -44,7 +44,7 @@ TEST(gr_test, test4) {
 TEST(gr_test, test5) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   Group* gr = test->findGroup("Masochist club(algorithms)", 1);
-  EXPECT_EQ(4.25, gr->getAverageMarks());
+  EXPECT_DOUBLE_EQ(4.25, gr->getAverageMarks());
   delete gr;
   delete test;
 }
@@ -69,7 +69,7 @@ TEST(d_test, test8) {
   test->initHeads();
   test->fireStudents();
   Group* gr = test->findGroup("Masochist club(algorithms)", 1);
-  EXPECT_EQ(5, gr->getGroupSize());
+  EXPECT_EQ(2, gr->getGroupSize());
   delete gr;
   delete test;
 }
