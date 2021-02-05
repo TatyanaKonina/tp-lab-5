@@ -93,7 +93,7 @@ unsigned int Group::getTitle() const {
   return this->title;
 }
 
-int Group::getGroupSize() const {
+int Group::getGroupSize() {
   return students.size();
 }
 
