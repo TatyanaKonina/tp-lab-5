@@ -26,7 +26,7 @@ class Group {
   std::map <unsigned int, Student*> getStudents();
   std::string getSpec() const;
   unsigned int getTitle() const;
-  int getGroupSize() const;
+  int getGroupSize();
 };
 
 #endif  // INCLUDE_GROUP_H_
