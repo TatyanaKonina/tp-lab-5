@@ -30,7 +30,7 @@ class Deanery {
   void getStatistics();
   void initHeads();
   void fireStudents();
-  Group* findGroup(std::string spec, int title);
+  std::vector<Group*> getGroups();
   Student* findStudent(unsigned int id);
 };
 #endif  // INCLUDE_DEANARY_H_
