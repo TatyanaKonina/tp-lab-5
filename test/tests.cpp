@@ -35,8 +35,7 @@ TEST(st_test, test3) {
 
 TEST(gr_test, test4) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
-  Group* gr = test->findGroup("Masochist club(algorithms)", 1);
-  test->printGroups();
+  Group* gr = test->getGroups()[0];
   EXPECT_EQ(4, gr->getGroupSize());
   delete gr;
   delete test;
@@ -44,7 +43,7 @@ TEST(gr_test, test4) {
 
 TEST(gr_test, test5) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
-  Group* gr = test->findGroup("Masochist club(algorithms)", 1);
+  Group* gr = test->getGroups()[1];
   EXPECT_DOUBLE_EQ(4.25, gr->getAverageMarks());
   delete gr;
   delete test;
@@ -52,7 +51,7 @@ TEST(gr_test, test5) {
 
 TEST(gr_test, test6) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
-  Group* gr = test->findGroup("Masochist club(algorithms)", 1);
+ Group* gr = test->getGroups()[1];
   EXPECT_EQ(-1, gr->getHead());
   delete gr;
   delete test;
@@ -60,7 +59,7 @@ TEST(gr_test, test6) {
 TEST(d_test, test7) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   test->initHeads();
-  Group* gr = test->findGroup("Masochist club(algorithms)", 1);
+ Group* gr = test->getGroups()[1];
   test->printGroups();
   EXPECT_EQ(5, gr->getHead());
   delete gr;
@@ -70,7 +69,7 @@ TEST(d_test, test8) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   test->initHeads();
   test->fireStudents();
-  Group* gr = test->findGroup("Masochist club(algorithms)", 1);
+  Group* gr = test->getGroups()[1];
   EXPECT_EQ(2, gr->getGroupSize());
   delete gr;
   delete test;
@@ -79,7 +78,7 @@ TEST(d_test, test8) {
 TEST(d_test, test9) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   test->initHeads();
-  Group* gr = test->findGroup("Ancient landuages(assembler)", 1);
+  Group* gr = test->getGroups()[0];
   EXPECT_EQ(2, gr->getHead());
   delete gr;
   delete test;
@@ -89,7 +88,7 @@ TEST(d_test, test10) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   test->initHeads();
   test->fireStudents();
-  Group* gr = test->findGroup("Ancient landuages(assembler)", 1);
+  Group* gr = test->getGroups()[0];
   EXPECT_EQ(4, gr->getGroupSize());
   delete gr;
   delete test;
