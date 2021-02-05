@@ -36,6 +36,7 @@ TEST(st_test, test3) {
 TEST(gr_test, test4) {
   Deanery* test = new Deanery("specList.txt", "students.txt");
   Group* gr = test->findGroup("Masochist club(algorithms)", 1);
+  test->printGroups();
   EXPECT_EQ(4, gr->getGroupSize());
   delete gr;
   delete test;
