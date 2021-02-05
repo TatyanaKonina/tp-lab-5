@@ -154,12 +154,8 @@ void Deanery::updateInfo(std::string output) const {
   }
   fout.close();
 }
-Group* Deanery::findGroup(std::string spec, int title) {
-  for (auto& group : groups) {
-    if (group->getSpec() == spec && group->getTitle() == title) {
-      return group;
-    }
-  }
+std::vector<Group*>Deanery::getGroups() {
+  return groups;
 }
 Student* Deanery::findStudent(unsigned int id) {
   for (Group* group : groups) {
